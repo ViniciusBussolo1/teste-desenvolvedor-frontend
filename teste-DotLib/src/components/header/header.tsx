@@ -1,16 +1,16 @@
 import * as Switch from '@radix-ui/react-switch'
 
-import { useTheme } from '../../hooks/useTheme'
-
 import { Sun, Moon } from 'lucide-react'
 
 import './header.scss'
+import { useContext } from 'react'
+import { ThemeContext } from '../../context/theme-context'
 
 export function Header() {
-  const { theme, setTheme } = useTheme()
+  const { theme, setTheme } = useContext(ThemeContext)
 
   return (
-    <header className={`header ${theme}`}>
+    <header className={`header-${theme}`}>
       <div className="container-header">
         <h1>
           <span className="span">Dot</span>.Lib

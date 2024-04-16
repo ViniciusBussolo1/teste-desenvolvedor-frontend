@@ -1,17 +1,23 @@
+import { FormEvent, useContext, useEffect, useState } from 'react'
+
 import { Search } from 'lucide-react'
 
-import './main.scss'
 import { Table } from '../table/table'
-import { FormEvent, useEffect, useState } from 'react'
-import axios from 'axios'
+
 import { bulasDataProps } from '../../type/bulas'
 import { useBulaFilter } from '../../hooks/useBulaFilter'
+
+import { ThemeContext } from '../../context/theme-context'
+
+import axios from 'axios'
+import './main.scss'
 
 export function Main() {
   const [bulas, setBulas] = useState({} as bulasDataProps)
   const [searchBula, setSearchBula] = useState('')
 
-  const { handleSearchBulas } = useBulaFilter()
+  const { handleSearchBulas, bulasFilter } = useBulaFilter()
+  const { theme } = useContext(ThemeContext)
 
   const baseURL = 'http://localhost:3000'
 
@@ -27,7 +33,7 @@ export function Main() {
   }
 
   return (
-    <main className="main">
+    <main className={`main-${theme}`}>
       <div className="container-main">
         <h1>Bulário Eletrônico</h1>
 
@@ -43,7 +49,7 @@ export function Main() {
           </button>
         </form>
 
-        <Table data={bulas} />
+        <Table data={bulas} bulasFilter={bulasFilter} />
       </div>
     </main>
   )
