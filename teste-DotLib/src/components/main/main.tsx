@@ -1,6 +1,7 @@
 import { Search } from 'lucide-react'
 
 import './main.scss'
+import { Table } from '../table/table'
 
 export function Main() {
   return (
@@ -17,6 +18,8 @@ export function Main() {
             <Search className="search" />
           </button>
         </form>
+
+        <Table />
       </div>
     </main>
   )
