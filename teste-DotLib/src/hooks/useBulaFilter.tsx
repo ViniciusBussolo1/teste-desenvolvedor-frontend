@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { bulasDataProps } from '../type/bulas'
+
 import axios from 'axios'
 
 export interface bulasData {
@@ -20,7 +20,7 @@ export interface bulasData {
 }
 
 export function useBulaFilter() {
-  const [bulasFilter, setbulasFilter] = useState<Array<bulasDataProps>>([])
+  const [bulasFilter, setbulasFilter] = useState<Array<bulasData>>([])
 
   function removerSpecials(texto: string) {
     // eliminando acentuação
