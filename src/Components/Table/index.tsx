@@ -22,7 +22,12 @@ export  function Table() {
   const [remedies, setRemedies] = useState<Remedy[]>([])
 
   async function getListOfRemedies() {
-    const remediesResponse = await api.get('/data')
+    const remediesResponse = await api.get('/data', {
+      params: {
+        _sort:'published_at',
+        _order: 'desc'
+      }
+    })
     const remediesData = remediesResponse.data
     setRemedies(remediesData)
   }
@@ -30,6 +35,8 @@ export  function Table() {
   useEffect(() =>  {
     getListOfRemedies()
   },[])
+
+  
   return (
       <TableContainer>
         <thead>
@@ -49,8 +56,6 @@ export  function Table() {
               </tr>
             )
           })}
-          
-         
         </tbody>
       </TableContainer>
   )
