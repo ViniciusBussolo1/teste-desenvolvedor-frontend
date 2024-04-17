@@ -24,6 +24,14 @@ export function TableBulas({ data }: TableDataProps) {
     return formattedDate
   }
 
+  const orderdData =
+    data.data &&
+    data.data.sort((a, b) => {
+      const dateA = new Date(a.published_at).getTime()
+      const dateB = new Date(b.published_at).getTime()
+      return dateB - dateA
+    })
+
   return (
     <table className={`table-${theme}`}>
       <thead>
@@ -31,12 +39,12 @@ export function TableBulas({ data }: TableDataProps) {
           <th>Nome</th>
           <th>Laboratório</th>
           <th>PDF</th>
-          <th>Data de Publicação</th>
+          <th className="order">Data de Publicação</th>
         </tr>
       </thead>
       <tbody>
-        {data.data &&
-          data.data.map((item) => {
+        {orderdData &&
+          orderdData.map((item) => {
             return (
               <tr key={item.id}>
                 <td>{item.name}</td>

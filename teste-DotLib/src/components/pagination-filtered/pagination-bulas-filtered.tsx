@@ -1,7 +1,9 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 
+import { Dispatch, SetStateAction, useContext } from 'react'
+import { ThemeContext } from '../../context/theme-context'
+
 import './pagination-bulas-filtered.scss'
-import { Dispatch, SetStateAction } from 'react'
 
 interface PaginationProps {
   setPage: Dispatch<SetStateAction<number>>
@@ -14,7 +16,8 @@ export function PaginationBulasFiltered({
   setPage,
   indiceFinal,
 }: PaginationProps) {
-  console.log(page, indiceFinal)
+  const { theme } = useContext(ThemeContext)
+
   const handleNextPage = () => {
     if (page < indiceFinal) {
       setPage(page + 1)
@@ -28,7 +31,7 @@ export function PaginationBulasFiltered({
   }
 
   return (
-    <div className="pagination">
+    <div className={`pagination-${theme}`}>
       <div className="container-pagination">
         <button onClick={handleReturnPage} disabled={page === 1}>
           <ChevronLeft />
