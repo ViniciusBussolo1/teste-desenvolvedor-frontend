@@ -1,0 +1,36 @@
+.table-dark {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 2rem; //32px
+
+  td, th {
+    border: 1px solid #29292E;
+    text-align: left;
+    padding: 0.75rem; //12px
+    color: white;
+  }
+  
+  .button-pdf {
+    cursor: pointer;
+  }
+  
+}
+
+.table-light {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 2rem; //32px
+
+  td, th {
+    border: 1px solid #29292E;
+    text-align: left;
+    padding: 0.75rem; //12px
+    color: black;
+  }
+  
+  .button-pdf {
+    cursor: pointer;
+  }
+  
+}
+
