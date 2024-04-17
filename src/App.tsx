@@ -1,17 +1,13 @@
+import { Header } from "./Components/Header";
+import Home from "./pages/home";
+
 function App() { 
   return (
-    <div>
-
-      <table>
-        <thead>
-          <tr>
-            <th>Nome</th>
-            <th>Data de Publicação</th>
-            <th>Nome do Laboratório</th>
-          </tr>
-        </thead>
-      </table>
-    </div>
+    <>
+      <Header>
+      </Header>
+       <Home />
+    </>
   );
 }
 
