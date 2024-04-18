@@ -1,14 +1,13 @@
-import { Header } from "./Components/Header";
-import Home from "./pages/home";
+import { Header } from './Components/Header'
+import Home from './pages/home'
 
-function App() { 
+function App() {
   return (
     <>
-      <Header>
-      </Header>
-       <Home />
+      <Header />
+      <Home />
     </>
-  );
+  )
 }
 
-export default App;
+export default App

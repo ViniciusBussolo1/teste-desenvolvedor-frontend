@@ -1,23 +1,22 @@
-import styled from "styled-components";
+import styled from 'styled-components'
 
 export const TableContainer = styled.table`
   margin-top: 2rem;
   width: 100%;
   border-radius: 8px;
-  border-collapse:  separate;
-  border: 1px solid ${props => props.theme['gray-300']};
+  border-collapse: separate;
+  border: 1px solid ${(props) => props.theme['gray-300']};
   border-spacing: 0px;
 
-
-  th, td { 
+  th,
+  td {
     padding: 1rem;
-    border-top:solid  1px ${props => props.theme['gray-300']};
+    border-top: solid 1px ${(props) => props.theme['gray-300']};
     text-align: left;
   }
 
-  th{
+  th {
     border-top: none;
- 
   }
 
   tr:first-child {
@@ -37,15 +36,8 @@ export const TableContainer = styled.table`
       border-bottom-right-radius: 8px;
     }
   }
-  
-
-
 
   tr:hover {
-    background-color: ${props => props.theme['gray-700']};
+    background-color: ${(props) => props.theme['gray-700']};
   }
-
-
-
-
-`;
+`
