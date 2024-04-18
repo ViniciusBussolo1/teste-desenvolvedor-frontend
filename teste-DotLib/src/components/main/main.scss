@@ -139,7 +139,13 @@
     }
 
     .container-table {
-      height: 39.5rem; //632px
+      height: 100%;
     }
+  }
+}
+
+@media (min-width: 1114px) {
+  .container-table {
+    height: 39.5rem; //632px
   }
 }

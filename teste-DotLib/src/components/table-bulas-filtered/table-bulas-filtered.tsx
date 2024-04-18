@@ -33,32 +33,41 @@ export function TableBulasFiltered({ bulasFilter }: TableDataProps) {
     })
 
   return (
-    <table className={`table-${theme}`}>
-      <thead>
-        <tr>
-          <th>Nome</th>
-          <th>Laboratório</th>
-          <th>PDF</th>
-          <th>Data de Publicação</th>
-        </tr>
-      </thead>
-      <tbody>
-        {orderdData &&
-          orderdData.map((item) => {
-            return (
-              <tr key={item.id}>
-                <td>{item.name}</td>
-                <td>{item.company}</td>
-                <td>
-                  <button className="button-pdf">
-                    <FileText />
-                  </button>
-                </td>
-                <td>{handleDate(item.published_at)}</td>
-              </tr>
-            )
-          })}
-      </tbody>
-    </table>
+    <div className="table-container">
+      <table className={`table-${theme}`}>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Laboratório</th>
+            <th>PDF</th>
+            <th>Data de Publicação</th>
+          </tr>
+        </thead>
+        <tbody>
+          {orderdData &&
+            orderdData.map((item) => {
+              return (
+                <tr key={item.id}>
+                  <td>{item.name}</td>
+                  <td>{item.company}</td>
+                  <td key={item.id}>
+                    <button className="button-pdf">
+                      <a
+                        href={item.documents[0].url}
+                        download={'documento.pdf'}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <FileText color="white" />
+                      </a>
+                    </button>
+                  </td>
+                  <td>{handleDate(item.published_at)}</td>
+                </tr>
+              )
+            })}
+        </tbody>
+      </table>
+    </div>
   )
 }

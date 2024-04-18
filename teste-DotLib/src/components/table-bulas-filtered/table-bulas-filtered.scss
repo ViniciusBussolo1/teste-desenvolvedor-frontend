@@ -1,6 +1,12 @@
+.table-container {
+  width: 100%; 
+  overflow-x: auto; 
+}
+
 .table-dark {
   border-collapse: collapse;
-  width: 100%;
+  width: auto;
+  height: 39.625rem; //634px
   margin-top: 2rem; //32px
 
   td, th {
@@ -18,7 +24,8 @@
 
 .table-light {
   border-collapse: collapse;
-  width: 100%;
+  width: auto;
+  height: 39.625rem; //634px
   margin-top: 2rem; //32px
 
   td, th {

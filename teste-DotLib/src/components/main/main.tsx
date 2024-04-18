@@ -65,9 +65,7 @@ export function Main() {
 
         {bulasFilter.length ? (
           <>
-            <div className="container-table">
-              <TableBulasFiltered bulasFilter={bulasParaPaginaAtual} />
-            </div>
+            <TableBulasFiltered bulasFilter={bulasParaPaginaAtual} />
 
             <PaginationBulasFiltered
               page={pageFiltered}
@@ -77,9 +75,7 @@ export function Main() {
           </>
         ) : (
           <>
-            <div className="container-table">
-              <TableBulas data={bulas} />
-            </div>
+            <TableBulas data={bulas} />
 
             <PaginationBulas
               page={page}

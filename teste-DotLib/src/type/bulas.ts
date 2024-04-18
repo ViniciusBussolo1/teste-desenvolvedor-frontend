@@ -11,12 +11,14 @@ export interface bulasDataProps {
       name: string
       published_at: string
       company: string
-      documents: {
-        id: string
-        expedient: string
-        type: string
-        url: string
-      }
+      documents: [
+        {
+          id: string
+          expedient: string
+          type: string
+          url: string
+        },
+      ]
       active_principles: {
         id: string
         name: string
@@ -30,12 +32,14 @@ export interface bulasData {
   name: string
   published_at: string
   company: string
-  documents: {
-    id: string
-    expedient: string
-    type: string
-    url: string
-  }
+  documents: [
+    {
+      id: string
+      expedient: string
+      type: string
+      url: string
+    },
+  ]
   active_principles: {
     id: string
     name: string
