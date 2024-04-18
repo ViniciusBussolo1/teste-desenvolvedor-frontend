@@ -1,0 +1,52 @@
+.main {
+  width: 100vw;
+  height: 100vh;
+  background-color: #000a06;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  border: 1px solid white;
+  width: 80%;
+  height: 60%;
+  display: flex;
+  justify-content: center;
+}
+
+.selectMenu {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: start;
+  background-color: #000a06;
+  color: white;
+  border: none;
+  cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.selectMenu:focus {
+  outline: none;
+}
+
+.selectMenu::-ms-expand {
+  display: none;
+}
+
+.menuSelect {
+  position: relative;
+  border-bottom: 0.3 em solid red;
+  width: 150px;
+  height: 2em;
+  display: flex;
+  align-items: start;
+}
+
+.menuSelect label {
+  position: absolute;
+  right: 1em;
+  cursor: pointer;
+}
