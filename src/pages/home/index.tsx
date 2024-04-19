@@ -6,7 +6,7 @@ import { MagnifyingGlass } from 'phosphor-react'
 import { z } from 'zod'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Pagination } from '../../Components/pagination'
+import { Pagination } from '../../Components/Pagination'
 import { useSearchParams } from 'react-router-dom'
 import { useRemedies } from '../../hooks/useRemedies'
 
@@ -87,7 +87,7 @@ export function Home() {
   }
 
   function clearForm() {
-    reset({ typeSearch: 'name' })
+    reset()
     clearErrors('searchText')
 
     setSearchParams({ page: '1' })
