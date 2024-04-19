@@ -36,7 +36,15 @@ export const ButtonPagination = styled.button`
     color: ${(props) => props.theme['gray-100']};
   }
 
-  &:hover {
+  &:not(:disabled):hover {
     background-color: ${(props) => props.theme['gray-600']};
+  }
+
+  &:disabled {
+    background-color: ${(props) => props.theme['gray-800']};
+    cursor: not-allowed;
+    svg {
+      color: ${(props) => props.theme['gray-200']};
+    }
   }
 `
