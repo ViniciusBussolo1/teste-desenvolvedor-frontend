@@ -15,6 +15,18 @@ export const InputStyle = styled.input`
   }
 
   &::placeholder {
+    font-size: 0.75rem;
     color: ${(props) => props.theme['gray-200']};
   }
+`
+
+export const ContainerInput = styled.div`
+  width: 100%;
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+`
+export const ErrorMessage = styled.p`
+  font-size: ${(props) => props.theme.sm};
+  color: ${(props) => props.theme['red-400']};
 `
