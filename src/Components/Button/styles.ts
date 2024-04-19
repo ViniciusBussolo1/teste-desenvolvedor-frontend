@@ -1,10 +1,14 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const ButtonStyle = styled.button`
+interface ButtonStyleProps {
+  variant: 'primary' | 'secondary'
+}
+
+export const ButtonStyle = styled.button<ButtonStyleProps>`
   background-color: ${(props) => props.theme['gray-500']};
   border: 1px solid transparent;
-  padding: 1rem;
-  border-radius: 122px;
+  padding: 0.6rem;
+  border-radius: 99999px;
   color: ${(props) => props.theme['gray-100']};
 
   display: flex;
@@ -15,8 +19,8 @@ export const ButtonStyle = styled.button`
   transition: 0.2s ease-in-out;
 
   svg {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.2rem;
+    height: 1.2rem;
   }
 
   &:hover {
@@ -26,4 +30,13 @@ export const ButtonStyle = styled.button`
   &:focus {
     border-color: ${(props) => props.theme['gray-100']};
   }
+
+  ${({ variant }) => {
+    if (variant === 'secondary') {
+      return css`
+        background-color: transparent;
+        border: 1px solid ${(props) => props.theme['gray-200']};
+      `
+    }
+  }}
 `
