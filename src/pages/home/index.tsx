@@ -1,7 +1,7 @@
 import { Button } from '../../Components/Button'
 import { Input } from '../../Components/Input'
 import { Table } from '../../Components/Table'
-import { HomeContainer } from './styles'
+import { ContainerButtons, ContainerInputs, HomeContainer } from './styles'
 import { MagnifyingGlass } from 'phosphor-react'
 import { z } from 'zod'
 import { Controller, useForm } from 'react-hook-form'
@@ -18,7 +18,7 @@ import {
 import { useEffect } from 'react'
 
 const searchRemediesSchema = z.object({
-  searchText: z.string().min(1),
+  searchText: z.string().min(1, 'Necessário inserir um texto de busca.'),
   typeSearch: z.enum(['name', 'company']),
 })
 
@@ -50,7 +50,9 @@ export function Home() {
     register,
     handleSubmit,
     control,
-    formState: { isSubmitting },
+    reset,
+    clearErrors,
+    formState: { isSubmitting, errors },
   } = useForm<SearchRemediesSchema>({
     resolver: zodResolver(searchRemediesSchema),
     values: {
@@ -84,6 +86,13 @@ export function Home() {
     setSearchParams({ page, typeSearch, searchText })
   }
 
+  function clearForm() {
+    reset({ typeSearch: 'name' })
+    clearErrors('searchText')
+
+    setSearchParams({ page: '1' })
+  }
+
   useEffect(() => {
     changeTypeSearch(typeSearchParams)
     changeTextSearch(searchTextParams)
@@ -105,45 +114,53 @@ export function Home() {
     <HomeContainer>
       <h1>Listagem de Remédios</h1>
       <form onSubmit={handleSubmit(handleSearchRemedios)}>
-        <Input
-          type="text"
-          placeholder="Digite o nome do remedio..."
-          {...register('searchText')}
-        />
+        <ContainerInputs>
+          <h1>Filtros:</h1>
+          <Input
+            type="text"
+            error={errors.searchText?.message}
+            placeholder="Nome do laboratório ou remédio de acordo com a seleção..."
+            {...register('searchText')}
+          />
 
-        <Controller
-          name="typeSearch"
-          control={control}
-          render={({ field: { name, onChange, ref } }) => (
-            <InputRadioRoot
-              name={name}
-              onValueChange={onChange}
-              ref={ref}
-              defaultValue="name"
-            >
-              <div>
-                <InputRadioItem value="name">
-                  <InputRadioIndicator />
-                </InputRadioItem>
-                <label>Name</label>
-              </div>
-              <div>
-                <InputRadioItem value="company">
-                  <InputRadioIndicator />
-                </InputRadioItem>
-                <label>Laboratório</label>
-              </div>
-            </InputRadioRoot>
-          )}
-        />
-
-        <Button
-          type="submit"
-          icon={<MagnifyingGlass size={16} weight="bold" />}
-          disabled={isSubmitting}
-        >
-          Pesquisar
-        </Button>
+          <Controller
+            name="typeSearch"
+            control={control}
+            render={({ field: { name, onChange, ref } }) => (
+              <InputRadioRoot
+                name={name}
+                onValueChange={onChange}
+                ref={ref}
+                defaultValue="name"
+              >
+                <div>
+                  <InputRadioItem value="name">
+                    <InputRadioIndicator />
+                  </InputRadioItem>
+                  <label>Name</label>
+                </div>
+                <div>
+                  <InputRadioItem value="company">
+                    <InputRadioIndicator />
+                  </InputRadioItem>
+                  <label>Laboratório</label>
+                </div>
+              </InputRadioRoot>
+            )}
+          />
+        </ContainerInputs>
+        <ContainerButtons>
+          <Button
+            type="submit"
+            icon={<MagnifyingGlass size={16} weight="bold" />}
+            disabled={isSubmitting}
+          >
+            Pesquisar
+          </Button>
+          <Button variant="secondary" onClick={clearForm}>
+            Limpar
+          </Button>
+        </ContainerButtons>
       </form>
       <Table remedies={remedies} />
       <Pagination
