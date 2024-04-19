@@ -7,27 +7,49 @@ import {
 
 interface PaginationProps {
   totalItems: number
-  pageCurrency?: string | number | null
+  pageCurrecy: number
+  nextPage: () => void
+  previousPage: () => void
 }
 
-export function Pagination({ totalItems, pageCurrency = 1 }: PaginationProps) {
+export function Pagination({
+  totalItems,
+  nextPage,
+  previousPage,
+  pageCurrecy,
+}: PaginationProps) {
   const perPage = 10
   const pages = Math.ceil(totalItems / perPage)
 
-  function handleNextPage() {}
+  function handleNextPage() {
+    nextPage()
+  }
+
+  function handlePreviousPage() {
+    previousPage()
+  }
+
+  const isExistingPreviousPage = pageCurrecy <= 1
+  const isExistingNextPage = pageCurrecy === pages
 
   return (
     <PaginationContainer>
       <span>Total de {totalItems} item(s)</span>
       <div>
         <p>
-          Página {pageCurrency} de {pages}
+          Página {pageCurrecy} de {pages}
         </p>
         <ButtonsContainer>
-          <ButtonPagination>
+          <ButtonPagination
+            onClick={handlePreviousPage}
+            disabled={isExistingPreviousPage}
+          >
             <CaretLeft />
           </ButtonPagination>
-          <ButtonPagination onClick={handleNextPage}>
+          <ButtonPagination
+            onClick={handleNextPage}
+            disabled={isExistingNextPage}
+          >
             <CaretRight />
           </ButtonPagination>
         </ButtonsContainer>

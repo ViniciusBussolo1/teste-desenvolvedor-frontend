@@ -31,7 +31,9 @@ export function Home() {
 
   const typeSearchParams = searchParams.get('typeSearch') || ''
 
-  const pageCurrency = searchParams.get('page') ? searchParams.get('page') : 1
+  const pageCurrency = searchParams.get('page')
+    ? Number(searchParams.get('page'))
+    : 1
 
   const {
     remedies,
@@ -57,7 +59,7 @@ export function Home() {
     },
   })
 
-  async function handleSearchRemedios({
+  function handleSearchRemedios({
     searchText,
     typeSearch,
   }: SearchRemediesSchema) {
@@ -66,6 +68,20 @@ export function Home() {
     } else {
       setSearchParams({ typeSearch, searchText, page: '1' })
     }
+  }
+
+  function nextPage() {
+    const page = String(Number(pageCurrency) + 1)
+    const typeSearch = typeSearchParams
+    const searchText = searchTextParams
+    setSearchParams({ page, typeSearch, searchText })
+  }
+
+  function previousPage() {
+    const page = String(Number(pageCurrency) - 1)
+    const typeSearch = typeSearchParams
+    const searchText = searchTextParams
+    setSearchParams({ page, typeSearch, searchText })
   }
 
   useEffect(() => {
@@ -130,7 +146,12 @@ export function Home() {
         </Button>
       </form>
       <Table remedies={remedies} />
-      <Pagination totalItems={totalItems} pageCurrency={pageCurrency} />
+      <Pagination
+        totalItems={totalItems}
+        nextPage={nextPage}
+        previousPage={previousPage}
+        pageCurrecy={pageCurrency}
+      />
     </HomeContainer>
   )
 }
