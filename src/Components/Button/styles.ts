@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 interface ButtonStyleProps {
-  variant: 'primary' | 'secondary'
+  variant: 'primary' | 'secondary' | 'icon'
 }
 
 export const ButtonStyle = styled.button<ButtonStyleProps>`
@@ -10,6 +10,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
   padding: 0.6rem;
   border-radius: 99999px;
   color: ${(props) => props.theme['gray-100']};
+  cursor: pointer;
 
   display: flex;
   align-items: center;
@@ -36,6 +37,37 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
       return css`
         background-color: transparent;
         border: 1px solid ${(props) => props.theme['gray-200']};
+      `
+    }
+  }}
+
+  ${({ variant }) => {
+    if (variant === 'icon') {
+      return css`
+        width: 2.1rem;
+        border-radius: 99999px;
+        border: 1px solid ${(props) => props.theme['gray-400']};
+        background-color: transparent;
+        padding: 0.4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          color: ${(props) => props.theme['gray-100']};
+        }
+
+        &:not(:disabled):hover {
+          background-color: ${(props) => props.theme['gray-600']};
+        }
+
+        &:disabled {
+          background-color: ${(props) => props.theme['gray-800']};
+          cursor: not-allowed;
+          svg {
+            color: ${(props) => props.theme['gray-200']};
+          }
+        }
       `
     }
   }}

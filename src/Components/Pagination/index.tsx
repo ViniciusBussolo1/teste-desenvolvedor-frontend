@@ -1,9 +1,6 @@
 import { CaretLeft, CaretRight } from 'phosphor-react'
-import {
-  ButtonPagination,
-  ButtonsContainer,
-  PaginationContainer,
-} from './style'
+import { ButtonsContainer, PaginationContainer } from './style'
+import { Button } from '../Button'
 
 interface PaginationProps {
   totalItems: number
@@ -40,18 +37,20 @@ export function Pagination({
           Página {pageCurrecy} de {pages}
         </p>
         <ButtonsContainer>
-          <ButtonPagination
+          <Button
+            variant="icon"
             onClick={handlePreviousPage}
             disabled={isExistingPreviousPage}
           >
             <CaretLeft />
-          </ButtonPagination>
-          <ButtonPagination
+          </Button>
+          <Button
+            variant="icon"
             onClick={handleNextPage}
             disabled={isExistingNextPage}
           >
             <CaretRight />
-          </ButtonPagination>
+          </Button>
         </ButtonsContainer>
       </div>
     </PaginationContainer>
