@@ -5,17 +5,29 @@ import {
   PaginationContainer,
 } from './style'
 
-export function Pagination() {
+interface PaginationProps {
+  totalItems: number
+  pageCurrency?: string | number | null
+}
+
+export function Pagination({ totalItems, pageCurrency = 1 }: PaginationProps) {
+  const perPage = 10
+  const pages = Math.ceil(totalItems / perPage)
+
+  function handleNextPage() {}
+
   return (
     <PaginationContainer>
-      <span>Total de 25 item(s)</span>
+      <span>Total de {totalItems} item(s)</span>
       <div>
-        <p>Página 1 de 3</p>
+        <p>
+          Página {pageCurrency} de {pages}
+        </p>
         <ButtonsContainer>
           <ButtonPagination>
             <CaretLeft />
           </ButtonPagination>
-          <ButtonPagination>
+          <ButtonPagination onClick={handleNextPage}>
             <CaretRight />
           </ButtonPagination>
         </ButtonsContainer>

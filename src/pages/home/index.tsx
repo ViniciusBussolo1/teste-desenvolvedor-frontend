@@ -1,106 +1,126 @@
-import { useEffect, useState } from 'react'
 import { Button } from '../../Components/Button'
 import { Input } from '../../Components/Input'
 import { Table } from '../../Components/Table'
 import { HomeContainer } from './styles'
 import { MagnifyingGlass } from 'phosphor-react'
-import { api } from '../../lib/axios'
 import { z } from 'zod'
-import { useForm } from 'react-hook-form'
+import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Pagination } from '../../Components/pagination'
+import { useSearchParams } from 'react-router-dom'
+import { useRemedies } from '../../hooks/useRemedies'
+
+import {
+  InputRadioIndicator,
+  InputRadioItem,
+  InputRadioRoot,
+} from '../../Components/InputRadio/styles'
+import { useEffect } from 'react'
 
 const searchRemediesSchema = z.object({
-  name: z.string().nullable(),
-  laboratory: z.string().nullable(),
+  searchText: z.string().min(1),
+  typeSearch: z.enum(['name', 'company']),
 })
 
 type SearchRemediesSchema = z.infer<typeof searchRemediesSchema>
 
-export interface Remedy {
-  id: string
-  name: string
-  published_at: string
-  company: string
-  documents: {
-    id: string
-    expedient: string
-    type: string
-    url: string
-  }[]
-}
+export function Home() {
+  const [searchParams, setSearchParams] = useSearchParams()
 
-export default function Home() {
+  const searchTextParams = searchParams.get('searchText') || ''
+
+  const typeSearchParams = searchParams.get('typeSearch') || ''
+
+  const pageCurrency = searchParams.get('page') ? searchParams.get('page') : 1
+
+  const {
+    remedies,
+    totalItems,
+    changePageCurrency,
+    changeTextSearch,
+    changeTypeSearch,
+  } = useRemedies()
+
+  const typeSearchParamsValidate =
+    typeSearchParams === 'company' ? 'company' : 'name'
+
   const {
     register,
     handleSubmit,
+    control,
     formState: { isSubmitting },
   } = useForm<SearchRemediesSchema>({
     resolver: zodResolver(searchRemediesSchema),
     values: {
-      name: '',
-      laboratory: '',
+      searchText: searchTextParams || '',
+      typeSearch: typeSearchParamsValidate,
     },
   })
-  const [remedies, setRemedies] = useState<Remedy[]>([])
-
-  async function getListOfRemedies() {
-    const remediesResponse = await api.get('/data', {
-      params: {
-        _sort: 'published_at',
-        _order: 'desc',
-      },
-    })
-    const remediesData = remediesResponse.data
-    setRemedies(remediesData)
-  }
 
   async function handleSearchRemedios({
-    laboratory,
-    name,
+    searchText,
+    typeSearch,
   }: SearchRemediesSchema) {
-    if (name) {
-      const remediesResponse = await api.get('/data', {
-        params: {
-          name_like: name.toUpperCase(),
-          _sort: 'published_at',
-          _order: 'desc',
-        },
-      })
-      const remediesData = remediesResponse.data
-      setRemedies(remediesData)
-    }
-
-    if (laboratory) {
-      const remediesResponse = await api.get('/data', {
-        params: {
-          company_like: laboratory.toUpperCase(),
-          _sort: 'published_at',
-          _order: 'desc',
-        },
-      })
-
-      const remediesData = remediesResponse.data
-      setRemedies(remediesData)
+    if (typeSearch === 'name') {
+      setSearchParams({ typeSearch, searchText, page: '1' })
+    } else {
+      setSearchParams({ typeSearch, searchText, page: '1' })
     }
   }
 
   useEffect(() => {
-    getListOfRemedies()
-  }, [])
+    changeTypeSearch(typeSearchParams)
+    changeTextSearch(searchTextParams)
+    changePageCurrency(Number(pageCurrency))
+  }, [
+    searchTextParams,
+    typeSearchParams,
+    pageCurrency,
+    changePageCurrency,
+    changeTypeSearch,
+    changeTextSearch,
+  ])
+
+  if (!remedies) {
+    return <p>Loading...</p>
+  }
+
   return (
     <HomeContainer>
-      <h1>Listagem de Remedios</h1>
+      <h1>Listagem de Remédios</h1>
       <form onSubmit={handleSubmit(handleSearchRemedios)}>
         <Input
           type="text"
           placeholder="Digite o nome do remedio..."
-          {...register('name')}
+          {...register('searchText')}
         />
-        <Input
-          type="text"
-          placeholder="Digite o nome do laboratório farmacêutico..."
-          {...register('laboratory')}
+
+        <Controller
+          name="typeSearch"
+          control={control}
+          render={({ field: { name, onChange, ref } }) => (
+            <InputRadioRoot
+              name={name}
+              onValueChange={onChange}
+              ref={ref}
+              defaultValue="name"
+            >
+              <div>
+                <InputRadioItem value="name">
+                  <InputRadioIndicator />
+                </InputRadioItem>
+                <label>Name</label>
+              </div>
+              <div>
+                <InputRadioItem value="company">
+                  <InputRadioIndicator />
+                </InputRadioItem>
+                <label>Laboratório</label>
+              </div>
+            </InputRadioRoot>
+          )}
         />
+
         <Button
           type="submit"
           icon={<MagnifyingGlass size={16} weight="bold" />}
@@ -110,6 +130,7 @@ export default function Home() {
         </Button>
       </form>
       <Table remedies={remedies} />
+      <Pagination totalItems={totalItems} pageCurrency={pageCurrency} />
     </HomeContainer>
   )
 }
