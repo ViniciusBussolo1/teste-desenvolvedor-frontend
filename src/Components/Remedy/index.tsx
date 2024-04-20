@@ -1,16 +1,10 @@
 import { useCallback, useEffect, useState } from 'react'
-import {
-  CelContent,
-  CelHeader,
-  Line,
-  RemedyViewContainer,
-  Table,
-} from './styles'
+import { RemedyViewContainer } from './styles'
 import { useRemedies } from '../../hooks/useRemedies'
 import { Remedy } from '../../context/RemediesProvider'
 import { FormatterData } from '../../utils/formatters'
-import { Button } from '../Button'
-import { MagnifyingGlassPlus } from 'phosphor-react'
+import { CelContent, CelHeader, Table, Line } from '../Table/style'
+import DocumentTable from './components/DocumentTable'
 
 interface RemedyViewProps {
   remedyId: string
@@ -63,35 +57,16 @@ export function RemedyView({ remedyId }: RemedyViewProps) {
       </Table>
       <h2>Documentos do Remédio</h2>
 
-      <Table>
-        <Line>
-          <CelHeader>Nº de registro da bula:</CelHeader>
-          <CelContent>{remedy.documents[0].expedient}</CelContent>
-        </Line>
-        <Line>
-          <CelHeader>Typo: </CelHeader>
-          <CelContent>
-            {remedy.documents[0].type === 'PATIENT'
-              ? 'Paciente'
-              : 'profissional'}
-          </CelContent>
-        </Line>
-        <Line>
-          <CelContent>
-            <a href={remedy.documents[0].url}>
-              <Button>
-                <MagnifyingGlassPlus />
-                Abrir bula
-              </Button>
-            </a>
-          </CelContent>
-          <CelContent>
-            <a href={urlDownloads[0]} download={`${remedy.name}-bula.pdf`}>
-              <Button>Baixar bula</Button>
-            </a>
-          </CelContent>
-        </Line>
-      </Table>
+      {remedy.documents.map((document, index) => {
+        return (
+          <DocumentTable
+            key={document.id}
+            document={document}
+            urlDownload={urlDownloads[index]}
+            remedyName={remedy.name}
+          />
+        )
+      })}
     </RemedyViewContainer>
   )
 }
