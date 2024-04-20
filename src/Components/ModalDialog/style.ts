@@ -22,4 +22,6 @@ export const ModalContent = styled(Dialog.Content)`
   padding: 1rem;
   display: flex;
   flex-direction: column;
+
+  overflow: auto;
 `
