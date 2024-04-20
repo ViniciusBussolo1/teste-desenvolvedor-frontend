@@ -1,6 +1,6 @@
 import { Button } from '../../Components/Button'
 import { Input } from '../../Components/Input'
-import { Table } from '../../Components/Table'
+import { TableListRemedies } from '../../Components/TableListRemedies'
 import { ContainerButtons, ContainerInputs, HomeContainer } from './styles'
 import { MagnifyingGlass } from 'phosphor-react'
 import { z } from 'zod'
@@ -162,7 +162,7 @@ export function Home() {
           </Button>
         </ContainerButtons>
       </form>
-      <Table remedies={remedies} />
+      <TableListRemedies remedies={remedies} />
       <Pagination
         totalItems={totalItems}
         nextPage={nextPage}
