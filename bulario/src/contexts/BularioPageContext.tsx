@@ -32,6 +32,8 @@ export const AuthProvider = ({ children }: IProviderProps) => {
     const [data, setData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [lastPage, setLastPage] = useState(1);
+    const [searchValue, setSearchValue] = useState('');
+    const [filteredData, setFilteredData] = useState<IMedicine[]>([]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -64,14 +66,39 @@ export const AuthProvider = ({ children }: IProviderProps) => {
         setCurrentPage(prevPage => Math.max(prevPage - 1, 1));
     };
 
+    const sortedData = [...data].sort((a: IMedicine, b: IMedicine) => {
+        return new Date(b.published_at).getTime() - new Date(a.published_at).getTime();
+    });
+
+    const handleSearch = () => {
+        const formattedSearchValue = searchValue.toLowerCase().trim();
+        if (formattedSearchValue === '') {
+            setFilteredData([]);
+            return;
+        }
+
+        const filteredResults = data.filter((item: IMedicine) => {
+            const lowerCaseName = item.name.toLowerCase();
+            console.log(lowerCaseName)
+            const lowerCaseCompany = item.company.toLowerCase();
+            return lowerCaseName.includes(formattedSearchValue) || lowerCaseCompany.includes(formattedSearchValue);
+        });
+
+        setFilteredData(filteredResults);
+    };
+
     return (
         <AuthContext.Provider
             value={{
-                data,
                 nextPage,
                 prevPage,
                 lastPage,
-                currentPage
+                sortedData,
+                currentPage,
+                searchValue,
+                setSearchValue,
+                handleSearch,
+                filteredData
             }}
         >
             {children}
