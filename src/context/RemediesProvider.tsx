@@ -2,6 +2,7 @@ import React, { createContext, useCallback, useEffect, useState } from 'react'
 import { getListOfRemedies } from '../http/getListOfRemedies'
 import { getListOfRemediesByName } from '../http/getListOfRemediesByName'
 import { getListOfRemediesByLaboratory } from '../http/getListOfRemediesByLaboratory'
+import { getRemedy } from '../http/getRemedy'
 
 export interface Remedy {
   id: string
@@ -11,7 +12,7 @@ export interface Remedy {
   documents: {
     id: string
     expedient: string
-    type: string
+    type: 'PROFESSIONAL' | 'PATIENT'
     url: string
   }[]
 }
@@ -22,6 +23,7 @@ interface RemediesContextProps {
   changePageCurrency: (page: number) => void
   changeTextSearch: (textSearch: string) => void
   changeTypeSearch: (typeSearch: string) => void
+  getRemedyById: (remedyId: string) => Promise<Remedy>
 }
 
 interface IRemediesProviderProps {
@@ -31,11 +33,16 @@ interface IRemediesProviderProps {
 export const RemediesContext = createContext({} as RemediesContextProps)
 
 export function RemediesProvider({ children }: IRemediesProviderProps) {
-  const [remedies, setRemedies] = useState<Remedy[]>([])
+  const [remedies, setRemedies] = useState<Remedy>([])
   const [totalItems, setTotalItems] = useState<number>(1)
   const [pageCurrecy, setPageCurrecy] = useState<number>(1)
   const [textSearch, setTextSearch] = useState<string>('')
   const [typeSearch, setTypeSearch] = useState<string>('')
+
+  async function getRemedyById(remedyId: string): Promise<Remedy> {
+    const remedy = await getRemedy(remedyId)
+    return remedy
+  }
 
   async function getListAll(page: number) {
     const { remediesData, totalItens } = await getListOfRemedies(page)
@@ -94,6 +101,7 @@ export function RemediesProvider({ children }: IRemediesProviderProps) {
         changePageCurrency,
         changeTextSearch,
         changeTypeSearch,
+        getRemedyById,
       }}
     >
       {children}
