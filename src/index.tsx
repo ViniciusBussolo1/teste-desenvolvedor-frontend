@@ -10,6 +10,7 @@ root.render(
   <React.StrictMode>
     <ThemeProvider theme={defaultTheme}>
       <GlobalStyle />
+
       <App />
     </ThemeProvider>
   </React.StrictMode>,
