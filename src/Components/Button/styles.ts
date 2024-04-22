@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 
 interface ButtonStyleProps {
-  variant: 'primary' | 'secondary' | 'icon'
+  variant: 'primary' | 'secondary' | 'icon' | 'success'
 }
 
 export const ButtonStyle = styled.button<ButtonStyleProps>`
@@ -37,6 +37,18 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
       return css`
         background-color: transparent;
         border: 1px solid ${(props) => props.theme['gray-200']};
+      `
+    }
+  }}
+
+  ${({ variant }) => {
+    if (variant === 'success') {
+      return css`
+        background-color: ${(props) => props.theme['green-500']};
+
+        &:hover {
+          background-color: ${(props) => props.theme['green-700']};
+        }
       `
     }
   }}
