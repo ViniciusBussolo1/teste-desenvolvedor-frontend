@@ -86,7 +86,7 @@ export function Home() {
     setSearchParams({ page, typeSearch, searchText })
   }
 
-  function clearForm() {
+  function handleClearForm() {
     reset()
     clearErrors('searchText')
 
@@ -157,7 +157,7 @@ export function Home() {
           >
             Pesquisar
           </Button>
-          <Button variant="secondary" onClick={clearForm}>
+          <Button variant="secondary" onClick={handleClearForm}>
             Limpar
           </Button>
         </ContainerButtons>
