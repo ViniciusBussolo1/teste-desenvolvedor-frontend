@@ -19,7 +19,7 @@ export const ContainerButtons = styled.div`
 export const ContainerInputs = styled.div`
   width: 100%;
   display: flex;
-  gap: 2rem;
+  gap: 0.9rem;
   align-items: baseline;
   justify-content: start;
   h1 {
