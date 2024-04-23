@@ -55,7 +55,7 @@ export function Home() {
     formState: { isSubmitting, errors },
   } = useForm<SearchRemediesSchema>({
     resolver: zodResolver(searchRemediesSchema),
-    values: {
+    defaultValues: {
       searchText: searchTextParams || '',
       typeSearch: typeSearchParamsValidate,
     },
