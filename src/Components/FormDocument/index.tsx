@@ -9,6 +9,7 @@ import { Button } from '../Button'
 import { Controller, useForm } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { DocumentRemedy } from '../../pages/NewRemedy'
 
 const formDocumentSchema = z.object({
   expedient: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
@@ -21,7 +22,11 @@ const formDocumentSchema = z.object({
 
 type FormDocumentSchema = z.infer<typeof formDocumentSchema>
 
-export function FormDocument() {
+interface FormDocumentProps {
+  addDocument: (document: DocumentRemedy) => void
+}
+
+export function FormDocument({ addDocument }: FormDocumentProps) {
   const {
     register,
     handleSubmit,
@@ -30,14 +35,20 @@ export function FormDocument() {
   } = useForm<FormDocumentSchema>({
     resolver: zodResolver(formDocumentSchema),
     defaultValues: {
-      expedient: '132456',
+      expedient: '',
       type: 'PATIENT',
-      url: 'www.google.com',
+      url: '',
     },
   })
 
-  function SubmitFormDocument(data: FormDocumentSchema) {
-    console.log(data)
+  function SubmitFormDocument({ expedient, type, url }: FormDocumentSchema) {
+    const document: DocumentRemedy = {
+      expedient,
+      type,
+      url,
+      id: Math.random().toString(),
+    }
+    addDocument(document)
   }
   return (
     <FormDocumentContainer onSubmit={handleSubmit(SubmitFormDocument)}>
