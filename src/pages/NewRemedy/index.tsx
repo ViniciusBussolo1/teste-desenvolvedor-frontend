@@ -23,7 +23,7 @@ interface PrincipleActive {
   activePrinciple: string
 }
 
-interface Document {
+export interface DocumentRemedy {
   id: string
   expedient: string
   type: 'PROFESSIONAL' | 'PATIENT'
@@ -34,7 +34,7 @@ export function NewRemedy() {
   const [principleActives, setPrincipleActives] = useState<PrincipleActive[]>(
     [],
   )
-  const [documents, setDocuments] = useState<Document[]>([])
+  const [documents, setDocuments] = useState<DocumentRemedy[]>([])
 
   const { register: registerRemedy, getValues: getValuesRemedy } =
     useForm<FormRemedySchema>({
@@ -43,6 +43,17 @@ export function NewRemedy() {
 
   function handleSubmitRemedy() {
     const { company, name } = getValuesRemedy()
+  }
+
+  function addDocument(document: DocumentRemedy) {
+    setDocuments((prevDocuments) => [...prevDocuments, document])
+  }
+
+  function addPrincipleActive(principleActive: PrincipleActive) {
+    setPrincipleActives((prevPrincipleActive) => [
+      ...prevPrincipleActive,
+      principleActive,
+    ])
   }
 
   return (
@@ -71,7 +82,7 @@ export function NewRemedy() {
           buttonOpenModal={
             <Button variant="success">Adicionar documento </Button>
           }
-          ContentModal={<FormDocument />}
+          ContentModal={<FormDocument addDocument={addDocument} />}
         />
       </HeaderDocuments>
       {!(documents.length === 0) ? (
@@ -87,7 +98,7 @@ export function NewRemedy() {
         <EmpytMessage message="Não há ativos adicionados." />
       )}
 
-      <Button onClick={handleSubmitRemedy}>Adicionar Remédio</Button>
+      <Button onClick={handleSubmitRemedy}>Salvar</Button>
     </NewRemedyContainer>
   )
 }
