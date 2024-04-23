@@ -18,7 +18,7 @@ const formRemedySchema = z.object({
 })
 type FormRemedySchema = z.infer<typeof formRemedySchema>
 
-interface PrincipleActive {
+export interface PrincipleActive {
   id: string
   activePrinciple: string
 }
@@ -85,15 +85,17 @@ export function NewRemedy() {
           ContentModal={<FormDocument addDocument={addDocument} />}
         />
       </HeaderDocuments>
+
       {!(documents.length === 0) ? (
-        <ListDocuments />
+        <ListDocuments documents={documents} />
       ) : (
         <EmpytMessage message="Não há documentos adicionados." />
       )}
 
-      <FormPrincipleAtive />
+      <FormPrincipleAtive addPrincipleActive={addPrincipleActive} />
+
       {!(principleActives.length === 0) ? (
-        <ListPrincipleActives />
+        <ListPrincipleActives principleActives={principleActives} />
       ) : (
         <EmpytMessage message="Não há ativos adicionados." />
       )}

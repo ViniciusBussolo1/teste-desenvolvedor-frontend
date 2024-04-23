@@ -4,6 +4,7 @@ import { Button } from '../Button'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { PrincipleActive } from '../../pages/NewRemedy'
 
 const formPrincipleAtiveSchema = z.object({
   activePrinciple: z
@@ -13,12 +14,13 @@ const formPrincipleAtiveSchema = z.object({
 
 type FormPrincipleAtiveSchema = z.infer<typeof formPrincipleAtiveSchema>
 
-export function FormPrincipleAtive() {
-  function submitPrincipleActive({
-    activePrinciple,
-  }: FormPrincipleAtiveSchema) {
-    console.log('🚀 ~ NewRemedy ~ active_principle:', activePrinciple)
-  }
+interface FormPrincipleAtiveProps {
+  addPrincipleActive: (principleActive: PrincipleActive) => void
+}
+
+export function FormPrincipleAtive({
+  addPrincipleActive,
+}: FormPrincipleAtiveProps) {
   const {
     register: registerPrincipleActive,
     handleSubmit: handleSubmitPrincipleActive,
@@ -26,6 +28,15 @@ export function FormPrincipleAtive() {
   } = useForm<FormPrincipleAtiveSchema>({
     resolver: zodResolver(formPrincipleAtiveSchema),
   })
+
+  function submitPrincipleActive({
+    activePrinciple,
+  }: FormPrincipleAtiveSchema) {
+    addPrincipleActive({
+      id: Math.random().toString(),
+      activePrinciple,
+    })
+  }
   return (
     <>
       <h2>Adicionar Principio Ativo:</h2>
