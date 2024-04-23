@@ -3,6 +3,7 @@ import { getListOfRemedies } from '../http/getListOfRemedies'
 import { getListOfRemediesByName } from '../http/getListOfRemediesByName'
 import { getListOfRemediesByLaboratory } from '../http/getListOfRemediesByLaboratory'
 import { getRemedy } from '../http/getRemedy'
+import { createRemedy } from '../http/createRemedies'
 
 export interface Remedy {
   id: string
@@ -17,6 +18,23 @@ export interface Remedy {
   }[]
 }
 
+interface RemedyRequestData {
+  id: string
+  name: string
+  published_at: string
+  company: string
+  documents: {
+    id: string
+    expedient: string
+    type: 'PROFESSIONAL' | 'PATIENT'
+    url: string
+  }[]
+  principleActives?: {
+    id: string
+    activePrinciple: string
+  }[]
+}
+
 interface RemediesContextProps {
   remedies: Remedy[]
   totalItems: number
@@ -24,15 +42,16 @@ interface RemediesContextProps {
   changeTextSearch: (textSearch: string) => void
   changeTypeSearch: (typeSearch: string) => void
   getRemedyById: (remedyId: string) => Promise<Remedy>
+  addRemedy: (remedyRequest: RemedyRequestData) => void
 }
 
-interface IRemediesProviderProps {
+interface RemediesProviderProps {
   children: React.ReactNode
 }
 
 export const RemediesContext = createContext({} as RemediesContextProps)
 
-export function RemediesProvider({ children }: IRemediesProviderProps) {
+export function RemediesProvider({ children }: RemediesProviderProps) {
   const [remedies, setRemedies] = useState<Remedy>([])
   const [totalItems, setTotalItems] = useState<number>(1)
   const [pageCurrecy, setPageCurrecy] = useState<number>(1)
@@ -68,6 +87,10 @@ export function RemediesProvider({ children }: IRemediesProviderProps) {
     setRemedies(remediesData)
   }
 
+  async function addRemedy(remedyRequestData: RemedyRequestData) {
+    createRemedy(remedyRequestData)
+  }
+
   const getListByParams = useCallback(() => {
     if (typeSearch === 'company') {
       getListByCompany(textSearch, pageCurrecy)
@@ -88,7 +111,7 @@ export function RemediesProvider({ children }: IRemediesProviderProps) {
   function changeTypeSearch(typeSearch: string) {
     setTypeSearch(typeSearch)
   }
-  // eslint
+
   useEffect(() => {
     getListByParams()
   }, [getListByParams])
@@ -102,6 +125,7 @@ export function RemediesProvider({ children }: IRemediesProviderProps) {
         changeTextSearch,
         changeTypeSearch,
         getRemedyById,
+        addRemedy,
       }}
     >
       {children}

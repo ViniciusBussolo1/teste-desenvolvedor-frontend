@@ -6,6 +6,7 @@ import { MagnifyingGlass, PencilLine } from 'phosphor-react'
 import { Remedy } from '../../context/RemediesProvider'
 import ModalDialog from '../ModalDialog'
 import { RemedyView } from '../Remedy'
+import { Link } from 'react-router-dom'
 
 interface TableProps {
   remedies: Remedy[]
@@ -41,9 +42,11 @@ export function TableListRemedies({ remedies }: TableProps) {
               <td>{FormatterData.format(new Date(remedy.published_at))}</td>
               <td>{remedy.company}</td>
               <td>
-                <Button>
-                  <PencilLine />
-                </Button>
+                <Link to={`/remedy/${remedy.id}/update`}>
+                  <Button>
+                    <PencilLine />
+                  </Button>
+                </Link>
               </td>
             </tr>
           )

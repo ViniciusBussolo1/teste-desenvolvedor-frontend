@@ -11,6 +11,7 @@ import ListDocuments from '../../Components/ListDocuments'
 import ListPrincipleActives from '../../Components/ListPrincipleActives'
 import { useState } from 'react'
 import EmpytMessage from '../../Components/EmpytMessage'
+import { useRemedies } from '../../hooks/useRemedies'
 
 const formRemedySchema = z.object({
   name: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
@@ -36,14 +37,12 @@ export function NewRemedy() {
   )
   const [documents, setDocuments] = useState<DocumentRemedy[]>([])
 
+  const { addRemedy } = useRemedies()
+
   const { register: registerRemedy, getValues: getValuesRemedy } =
     useForm<FormRemedySchema>({
       resolver: zodResolver(formRemedySchema),
     })
-
-  function handleSubmitRemedy() {
-    const { company, name } = getValuesRemedy()
-  }
 
   function addDocument(document: DocumentRemedy) {
     setDocuments((prevDocuments) => [...prevDocuments, document])
@@ -54,6 +53,21 @@ export function NewRemedy() {
       ...prevPrincipleActive,
       principleActive,
     ])
+  }
+
+  function handleSubmitRemedy() {
+    const { company, name } = getValuesRemedy()
+
+    const RemedyRequest = {
+      id: Math.random().toString(),
+      published_at: new Date().toISOString(),
+      company: company.toUpperCase(),
+      name: name.toUpperCase(),
+      principleActives,
+      documents,
+    }
+
+    addRemedy(RemedyRequest)
   }
 
   return (
