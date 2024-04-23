@@ -13,6 +13,7 @@ import { useState } from 'react'
 import EmpytMessage from '../../Components/EmpytMessage'
 import { useRemedies } from '../../hooks/useRemedies'
 import { toast } from 'sonner'
+import { Link } from 'react-router-dom'
 
 const formRemedySchema = z.object({
   name: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
@@ -69,7 +70,13 @@ export function NewRemedy() {
     }
     try {
       addRemedy(RemedyRequest)
-      toast.success('Remédio adicionado com Sucesso.')
+      toast.success('Remédio adicionado com Sucesso.', {
+        action: (
+          <Link to="/">
+            <Button variant="toast">Voltar a lista</Button>
+          </Link>
+        ),
+      })
     } catch {
       toast.error('Erro ao adicionar o Remédio.')
     }
