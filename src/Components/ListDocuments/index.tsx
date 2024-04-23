@@ -1,8 +1,13 @@
 import React from 'react'
 import { ListContainer } from './style'
 import { CelHeader, Line, Table } from '../Table/style'
+import { DocumentRemedy } from '../../pages/NewRemedy'
 
-export default function ListDocuments() {
+interface ListDocumentsProps {
+  documents: DocumentRemedy[]
+}
+
+export default function ListDocuments({ documents }: ListDocumentsProps) {
   return (
     <ListContainer>
       <Table>
@@ -11,11 +16,15 @@ export default function ListDocuments() {
           <CelHeader>Tipo</CelHeader>
           <CelHeader>URL</CelHeader>
         </Line>
-        {/* <Line>
-          <CelContent>Expediente</CelContent>
-          <CelContent>Tipo</CelContent>
-          <CelContent>URL</CelContent>
-        </Line> */}
+        {documents.map((document) => {
+          return (
+            <Line key={document.id}>
+              <CelHeader>{document.expedient}</CelHeader>
+              <CelHeader>{document.type}</CelHeader>
+              <CelHeader>{document.url}</CelHeader>
+            </Line>
+          )
+        })}
       </Table>
     </ListContainer>
   )
