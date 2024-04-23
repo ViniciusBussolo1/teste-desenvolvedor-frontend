@@ -5,15 +5,17 @@ interface ButtonStyleProps {
 }
 
 export const ButtonStyle = styled.button<ButtonStyleProps>`
+  width: 100%;
+  height: 3rem;
   background-color: ${(props) => props.theme['gray-500']};
   border: 1px solid transparent;
   padding: 0.6rem;
   border-radius: 99999px;
   color: ${(props) => props.theme['gray-100']};
   cursor: pointer;
-
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.5rem;
 
   font-weight: bold;
@@ -57,6 +59,7 @@ export const ButtonStyle = styled.button<ButtonStyleProps>`
     if (variant === 'icon') {
       return css`
         width: 2.1rem;
+        height: 2.1rem;
         border-radius: 99999px;
         border: 1px solid ${(props) => props.theme['gray-400']};
         background-color: transparent;
