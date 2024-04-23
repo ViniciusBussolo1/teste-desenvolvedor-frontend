@@ -12,6 +12,7 @@ import ListPrincipleActives from '../../Components/ListPrincipleActives'
 import { useState } from 'react'
 import EmpytMessage from '../../Components/EmpytMessage'
 import { useRemedies } from '../../hooks/useRemedies'
+import { toast } from 'sonner'
 
 const formRemedySchema = z.object({
   name: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
@@ -66,8 +67,12 @@ export function NewRemedy() {
       principleActives,
       documents,
     }
-
-    addRemedy(RemedyRequest)
+    try {
+      addRemedy(RemedyRequest)
+      toast.success('Remédio adicionado com Sucesso.')
+    } catch {
+      toast.error('Erro ao adicionar o Remédio.')
+    }
   }
 
   return (

@@ -685,6 +685,101 @@
           "id": "0.9251055676126447"
         }
       ]
+    },
+    {
+      "id": "0.39778150858549255",
+      "published_at": "2024-04-23T18:33:11.495Z",
+      "company": "CRISTÁLIA PRODUTOS QUÍMICOS FARMACÊUTICOS LTDA.",
+      "name": "ACEZO",
+      "principleActives": [
+        {
+          "id": "0.11017039204955514",
+          "activePrinciple": "Dipirona"
+        }
+      ],
+      "documents": [
+        {
+          "expedient": "151651321321231",
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.36247264309372995"
+        }
+      ]
+    },
+    {
+      "id": "0.2835936776692072",
+      "published_at": "2024-04-23T18:33:29.113Z",
+      "company": "CRISTÁLIA PRODUTOS QUÍMICOS FARMACÊUTICOS LTDA.",
+      "name": "ACEZO",
+      "principleActives": [
+        {
+          "id": "0.11017039204955514",
+          "activePrinciple": "Dipirona"
+        }
+      ],
+      "documents": [
+        {
+          "expedient": "151651321321231",
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.36247264309372995"
+        }
+      ]
+    },
+    {
+      "id": "0.8318379386298242",
+      "published_at": "2024-04-23T18:41:02.349Z",
+      "company": "MULTILAB INDUSTRIA E COMERCIO DE PRODUTOS FARMACEUTICOS LTDA",
+      "name": "AMOXICILINA",
+      "principleActives": [],
+      "documents": [
+        {
+          "expedient": "165151356",
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.5681749864886765"
+        }
+      ]
+    },
+    {
+      "id": "0.29145104910260655",
+      "published_at": "2024-04-23T18:44:16.291Z",
+      "company": "EMS",
+      "name": "AMOXILINA",
+      "principleActives": [
+        {
+          "id": "0.21386179887941714",
+          "activePrinciple": "Dipirona"
+        }
+      ],
+      "documents": [
+        {
+          "expedient": "4612321231",
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.8984479176226374"
+        }
+      ]
+    },
+    {
+      "id": "0.07494102345600773",
+      "published_at": "2024-04-23T18:46:22.727Z",
+      "company": "EMS",
+      "name": "ALPRAZOLAM",
+      "principleActives": [
+        {
+          "id": "0.5440329324136779",
+          "activePrinciple": "Dipirona"
+        }
+      ],
+      "documents": [
+        {
+          "expedient": "7946513",
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.27351602806962316"
+        }
+      ]
     }
   ]
 }
