@@ -110,7 +110,9 @@ export function UpdateRemedy() {
       <FormPrincipleAtive />
       <ListPrincipleActives />
 
-      <Button onClick={handleSubmitUpdateRemedy}>Salvar</Button>
+      <Button variant="success" onClick={handleSubmitUpdateRemedy}>
+        Salvar
+      </Button>
     </UpdateFormContainer>
   )
 }

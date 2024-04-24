@@ -136,7 +136,9 @@ export function FormDocument({ document, closedModal }: FormDocumentProps) {
       {document ? (
         <Button type="submit">Alterar Documento</Button>
       ) : (
-        <Button type="submit">Criar Documento</Button>
+        <Button variant="success" type="submit">
+          Criar Documento
+        </Button>
       )}
     </FormDocumentContainer>
   )
