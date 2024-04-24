@@ -1,6 +1,6 @@
 import { api } from '../lib/axios'
 
-export async function getListOfRemediesByLaboratory(
+export async function getListOfRemediesByCompany(
   laboratory: string,
   page: number,
 ) {
