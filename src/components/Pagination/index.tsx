@@ -30,7 +30,7 @@ export const Pagination = ({ items }: { items: MedicineData[] }) => {
             const ProfessionalLeaflet = bula.documents.find(doc => doc.type === "PROFESSIONAL");
 
             return (
-              <tr key={bula.id + 1}>
+              <tr key={bula.id}>
                 <td>{bula.name}</td>
                 <td>{bula.company}</td>
                 <td>

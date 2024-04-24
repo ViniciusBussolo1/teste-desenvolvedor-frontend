@@ -12,7 +12,7 @@ const options = [
   { value: "laboratorio", label: "Laboratório" },
 ];
 
-export const Bulario = () => {
+export const DrugLabels = () => {
   const { register, handleSubmit, control, filteredDrugLabels } = useDrugLabel();
 
   return (
