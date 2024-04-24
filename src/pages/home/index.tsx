@@ -93,7 +93,6 @@ export function Home() {
       searchText: searchTextParams,
       typeSearch: typeSearchParams,
     })
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pageCurrency, searchTextParams, typeSearchParams])
 
   useEffect(() => {

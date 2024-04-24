@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { ListContainer } from './style'
 import { CelContent, CelHeader, Line, Table } from '../Table/style'
 import EmpytMessage from '../EmpytMessage'
@@ -9,11 +9,17 @@ import { FormDocument } from '../FormDocument'
 import { useRemedies } from '../../hooks/useRemedies'
 
 export default function ListDocuments() {
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+
   const { remedy } = useRemedies()
   const documents = remedy.documents
 
   if (documents.length === 0) {
     return <EmpytMessage message="Não há documentos adicionados." />
+  }
+
+  function closedModal() {
+    setIsOpenModal(false)
   }
 
   return (
@@ -33,12 +39,19 @@ export default function ListDocuments() {
               <CelContent>{document.url}</CelContent>
               <CelContent style={{ justifyContent: 'flex-end' }}>
                 <ModalDialog
+                  openModal={isOpenModal}
+                  onOpenChangeModal={setIsOpenModal}
                   buttonOpenModal={
                     <Button variant="icon">
                       <NotePencil />
                     </Button>
                   }
-                  ContentModal={<FormDocument document={document} />}
+                  ContentModal={
+                    <FormDocument
+                      closedModal={closedModal}
+                      document={document}
+                    />
+                  }
                 />
               </CelContent>
             </Line>

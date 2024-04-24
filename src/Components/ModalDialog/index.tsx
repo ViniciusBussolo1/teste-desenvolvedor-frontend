@@ -6,13 +6,17 @@ import { ModalContent, OverlayModal } from './style'
 interface ModalDiaogProps {
   buttonOpenModal: React.ReactNode
   ContentModal: React.ReactNode
+  openModal?: boolean
+  onOpenChangeModal?: (isOpen: boolean) => void
 }
 export default function ModalDialog({
   buttonOpenModal,
   ContentModal,
+  openModal,
+  onOpenChangeModal,
 }: ModalDiaogProps) {
   return (
-    <Dialog.Root>
+    <Dialog.Root open={openModal} onOpenChange={onOpenChangeModal}>
       <Dialog.Trigger asChild>{buttonOpenModal}</Dialog.Trigger>
       <OverlayModal />
       <ModalContent>

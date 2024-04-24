@@ -11,6 +11,7 @@ import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRemedies } from '../../hooks/useRemedies'
 import { DocumentRemedy } from '../../context/RemediesProvider'
+import { toast } from 'sonner'
 
 const formDocumentSchema = z.object({
   expedient: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
@@ -25,9 +26,10 @@ type FormDocumentSchema = z.infer<typeof formDocumentSchema>
 
 interface FormDocumentProps {
   document?: DocumentRemedy
+  closedModal: () => void
 }
 
-export function FormDocument({ document }: FormDocumentProps) {
+export function FormDocument({ document, closedModal }: FormDocumentProps) {
   const { addDocument, setDocument } = useRemedies()
 
   const documentId = document?.id
@@ -46,6 +48,7 @@ export function FormDocument({ document }: FormDocumentProps) {
     defaultValues: {
       expedient: defaulfValueExpedient,
       url: defaulfValueUrl,
+      type: defaulfValueType,
     },
   })
 
@@ -57,7 +60,14 @@ export function FormDocument({ document }: FormDocumentProps) {
         url,
         id: documentId,
       }
-      setDocument(document)
+
+      try {
+        setDocument(document)
+        toast.success('Foi Alterado com sucesso o documento.')
+        closedModal()
+      } catch (error) {
+        toast.error('Erro ao adicionar o documento.')
+      }
     } else {
       const document: DocumentRemedy = {
         expedient,
@@ -66,7 +76,13 @@ export function FormDocument({ document }: FormDocumentProps) {
         id: Math.random().toString(),
       }
 
-      addDocument(document)
+      try {
+        addDocument(document)
+        toast.success('Foi adicionado com sucesso o documento.')
+        closedModal()
+      } catch (error) {
+        toast.error('Erro ao adicionar o documento.')
+      }
     }
   }
   return (
@@ -97,7 +113,7 @@ export function FormDocument({ document }: FormDocumentProps) {
               name={name}
               ref={ref}
               onValueChange={onChange}
-              defaultValue={defaulfValueType}
+              value={defaulfValueType}
             >
               <ContainerRadio>
                 <div>

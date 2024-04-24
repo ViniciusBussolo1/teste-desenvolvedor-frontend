@@ -13,12 +13,6 @@ export const NewRemedyContainer = styled.div`
   }
 `
 
-export const FormRemedy = styled.form`
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-`
-
 export const HeaderDocuments = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr;

@@ -1,18 +1,18 @@
 import { useForm } from 'react-hook-form'
 import { Button } from '../../Components/Button'
 import { FormDocument } from '../../Components/FormDocument'
-import { Input } from '../../Components/Input'
 import ModalDialog from '../../Components/ModalDialog'
-import { FormRemedy, HeaderDocuments, NewRemedyContainer } from './styles'
+import { HeaderDocuments, NewRemedyContainer } from './styles'
 import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { FormPrincipleAtive } from '../../Components/FormPricipleActive'
 import ListDocuments from '../../Components/ListDocuments'
 import ListPrincipleActives from '../../Components/ListPrincipleActives'
-import { useState } from 'react'
 import { useRemedies } from '../../hooks/useRemedies'
 import { toast } from 'sonner'
 import { Link } from 'react-router-dom'
+import { FormRemedy } from '../../Components/FormRemedy'
+import { useEffect, useState } from 'react'
 
 const formRemedySchema = z.object({
   name: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
@@ -33,28 +33,13 @@ export interface DocumentRemedy {
 }
 
 export function NewRemedy() {
-  const [principleActives, setPrincipleActives] = useState<PrincipleActive[]>(
-    [],
-  )
-  const [documents, setDocuments] = useState<DocumentRemedy[]>([])
-
-  const { addRemedy } = useRemedies()
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const { addRemedy, remedy, clearRemedy } = useRemedies()
 
   const { register: registerRemedy, getValues: getValuesRemedy } =
     useForm<FormRemedySchema>({
       resolver: zodResolver(formRemedySchema),
     })
-
-  function addDocument(document: DocumentRemedy) {
-    setDocuments((prevDocuments) => [...prevDocuments, document])
-  }
-
-  function addPrincipleActive(principleActive: PrincipleActive) {
-    setPrincipleActives((prevPrincipleActive) => [
-      ...prevPrincipleActive,
-      principleActive,
-    ])
-  }
 
   function handleSubmitRemedy() {
     const { company, name } = getValuesRemedy()
@@ -64,8 +49,8 @@ export function NewRemedy() {
       published_at: new Date().toISOString(),
       company: company.toUpperCase(),
       name: name.toUpperCase(),
-      principleActives,
-      documents,
+      principleActives: remedy.principleActives,
+      documents: remedy.documents,
     }
     try {
       addRemedy(RemedyRequest)
@@ -81,42 +66,40 @@ export function NewRemedy() {
     }
   }
 
+  function closedModal() {
+    setIsOpenModal(false)
+  }
+
+  useEffect(() => {
+    clearRemedy()
+  }, [])
+
+  if (Object.values(remedy).length === 0) {
+    return <p>Carregando...</p>
+  }
+
   return (
     <NewRemedyContainer>
       <h2>Adicionar Remedio:</h2>
-      <FormRemedy>
-        <Input
-          placeholder="Digite o nome do Remedio"
-          id="name"
-          label="Name:"
-          htmlFor="name"
-          {...registerRemedy('name')}
-        />
-
-        <Input
-          placeholder="Digite o nome do Laboratório"
-          id="company"
-          label="Laboratório:"
-          htmlFor="company"
-          {...registerRemedy('company')}
-        />
-      </FormRemedy>
+      <FormRemedy registerRemedy={registerRemedy} />
       <HeaderDocuments>
         <h2>Adicionar Documentos</h2>
         <ModalDialog
+          openModal={isOpenModal}
+          onOpenChangeModal={setIsOpenModal}
           buttonOpenModal={
             <Button variant="success">Adicionar documento </Button>
           }
-          ContentModal={<FormDocument addDocument={addDocument} />}
+          ContentModal={<FormDocument closedModal={closedModal} />}
         />
       </HeaderDocuments>
 
-      <ListDocuments documents={documents} />
+      <ListDocuments />
 
       <h2>Adicionar Principio Ativo:</h2>
-      <FormPrincipleAtive addPrincipleActive={addPrincipleActive} />
+      <FormPrincipleAtive />
 
-      <ListPrincipleActives principleActives={principleActives} />
+      <ListPrincipleActives />
 
       <Button onClick={handleSubmitRemedy}>Salvar</Button>
     </NewRemedyContainer>

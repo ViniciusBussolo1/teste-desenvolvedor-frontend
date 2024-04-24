@@ -970,6 +970,32 @@
           "name": "Dipirona"
         }
       ]
+    },
+    {
+      "id": "0.48213773992823183",
+      "published_at": "2024-04-24T21:48:38.497Z",
+      "company": "EMS",
+      "name": "TESTE CREATE",
+      "principleActives": [
+        {
+          "id": "0.884693322453465",
+          "name": "ativo"
+        }
+      ],
+      "documents": [
+        {
+          "expedient": "8888888",
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.09964010128754586"
+        }
+      ],
+      "active_principles": [
+        {
+          "id": "0.884693322453465",
+          "name": "ativo"
+        }
+      ]
     }
   ]
 }
