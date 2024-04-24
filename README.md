@@ -1,31 +1,17 @@
-[![](https://dotlib.com/theme/img/logos/logo.png)](https://www.dotlib.com)
+### Features
 
-# Descrição da vaga de Desenvolvedor Frontend Jr.
+- [x] filtro por medicamento
+- [x] filtro por laboratorio
+- [x] Paginação no front
+- [x] Download bulas paciente e profissional
+- [ ] Componentização da tabela de exibição dos itens
 
-Buscamos profissionais que sejam apaixonados por desenvolvimento, inovação e novas tecnologias, para integrar nosso time em projetos baseados em Laravel, Node.js, React e React Native.
+### 🛠 Tecnologias
 
-[Oportunidades Dotlib](https://github.com/Dotlib-BR/oportunidades)
+As seguintes ferramentas foram usadas na construção do projeto:
 
-## Requisitos
-
-### Obrigatórios:
-
-- Experiência em desenvolvimento de sites em React
-- Consumo de APIs RESTful
-- SASS e Flexbox
-- API Contexts e Hooks
-- Controle de versões (GIT)
-
-### Bônus:
-
-- Conhecimentos em Docker
-- Conhecimentos em Typescript
-- Conhecimentos em Node.js
-- Conhecimentos em testes automatizados com Cypress
-- Experiência em metodologias ágeis (Scrum/Kanban)
-
-## Como se candidatar
-
-Para se candidatar, basta acessar a url e realizar o teste para a vaga:
-
-- [Teste para Desenvolvedor Frontend Jr.](teste-frontend.md)
+- Axios
+- clsx
+- react-hook-form
+- react-router-dom
+- react-select
