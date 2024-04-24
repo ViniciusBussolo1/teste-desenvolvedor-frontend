@@ -1,17 +1,21 @@
 import React from 'react'
 import { ListContainer } from './style'
-import { CelHeader, Line, Table } from '../Table/style'
-import { DocumentRemedy } from '../../pages/NewRemedy'
+import { CelContent, CelHeader, Line, Table } from '../Table/style'
 import EmpytMessage from '../EmpytMessage'
+import { Button } from '../Button'
+import { NotePencil } from 'phosphor-react'
+import ModalDialog from '../ModalDialog'
+import { FormDocument } from '../FormDocument'
+import { useRemedies } from '../../hooks/useRemedies'
 
-interface ListDocumentsProps {
-  documents: DocumentRemedy[]
-}
+export default function ListDocuments() {
+  const { remedy } = useRemedies()
+  const documents = remedy.documents
 
-export default function ListDocuments({ documents }: ListDocumentsProps) {
   if (documents.length === 0) {
     return <EmpytMessage message="Não há documentos adicionados." />
   }
+
   return (
     <ListContainer>
       <Table>
@@ -19,13 +23,24 @@ export default function ListDocuments({ documents }: ListDocumentsProps) {
           <CelHeader>Expediente</CelHeader>
           <CelHeader>Tipo</CelHeader>
           <CelHeader>URL</CelHeader>
+          <CelHeader></CelHeader>
         </Line>
         {documents.map((document) => {
           return (
             <Line key={document.id}>
-              <CelHeader>{document.expedient}</CelHeader>
-              <CelHeader>{document.type}</CelHeader>
-              <CelHeader>{document.url}</CelHeader>
+              <CelContent>{document.expedient}</CelContent>
+              <CelContent>{document.type}</CelContent>
+              <CelContent>{document.url}</CelContent>
+              <CelContent style={{ justifyContent: 'flex-end' }}>
+                <ModalDialog
+                  buttonOpenModal={
+                    <Button variant="icon">
+                      <NotePencil />
+                    </Button>
+                  }
+                  ContentModal={<FormDocument document={document} />}
+                />
+              </CelContent>
             </Line>
           )
         })}
