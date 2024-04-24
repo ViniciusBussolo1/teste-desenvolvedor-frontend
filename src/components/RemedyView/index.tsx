@@ -4,6 +4,7 @@ import { useRemedies } from '../../hooks/useRemedies'
 import { FormatterData } from '../../utils/formatters'
 import { CelContent, CelHeader, Table, Line } from '../Table/style'
 import DocumentTable from './components/DocumentTable'
+import EmpytMessage from '../EmpytMessage'
 
 interface RemedyViewProps {
   remedyId: string
@@ -67,6 +68,23 @@ export function RemedyView({ remedyId }: RemedyViewProps) {
           />
         )
       })}
+
+      <h2>Principios Ativos:</h2>
+
+      {remedy.principleActives.length === 0 ? (
+        <EmpytMessage message="Náo há princípios ativos." />
+      ) : (
+        <Table>
+          {remedy.principleActives.map((principleActive) => {
+            return (
+              <Line key={principleActive.id}>
+                <CelHeader>Principio ativo:</CelHeader>
+                <CelContent>{principleActive.name}</CelContent>
+              </Line>
+            )
+          })}
+        </Table>
+      )}
     </RemedyViewContainer>
   )
 }
