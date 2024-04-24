@@ -1,0 +1,56 @@
+.SearchContainer {
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
+  padding: 0;
+}
+
+.SearchBox {
+  display: flex;
+  align-items: center;
+}
+
+.SearchInput {
+  width: 35vw;
+  height: 4.5vh;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #B6B6B6;
+  padding-left: 1.5em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+  margin-top: 2.5em;
+}
+
+::placeholder {
+  color: WHITE;
+  font-style: italic;
+  padding: 0.5em;
+}
+
+.Dropdown {
+  width: 9vw;
+  height: 4.5vh;
+  padding: 5px;
+  border: none;
+  border-radius: 5px;
+  color: white;
+  background-color: #B6B6B6;
+  margin-left: 2em; 
+  padding-left: 0.7em;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin-top: 2.5em; 
+}
+
+.ExportCSVButton {
+  background-color: #00CA80;
+  color: #FFFFFF;
+  border: none;
+  cursor: pointer;
+  padding: 0.7em 0.9em;
+  border-radius: 4px;
+  margin-right: 2em;
+  font-weight: 700;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); 
+}

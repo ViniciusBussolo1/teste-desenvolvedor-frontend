@@ -1,0 +1,34 @@
+.GeneralContainer {
+  display: flex;
+  flex-direction: column; 
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: #f5f6fa;
+  overflow: hidden;
+}
+
+.ContentWrapper {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 88%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.ComponentWrapper {
+  width: 100%;
+  height: 99%;
+  padding-left: 5em;
+  border-radius: 12px;
+  border: 1px solid rgba(128, 128, 128, 0.6);
+}
+
+hr {
+  width: 100%;
+  margin: 1em 0;
+  border: none;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+}

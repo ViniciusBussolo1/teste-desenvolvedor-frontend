@@ -1,0 +1,18 @@
+.legend {
+  display: flex;
+  flex-direction: column;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+}
+
+.legend-color {
+  width: 10px;
+  height: 10px;
+}
+
+.legend-label {
+  white-space: nowrap; 
+}

@@ -1,0 +1,14 @@
+.HeaderContainer {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: transparent;
+  margin-top: 0.3em;
+}
+
+.HeaderTitle {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #343a40;
+  margin-top: 0.4em;
+}

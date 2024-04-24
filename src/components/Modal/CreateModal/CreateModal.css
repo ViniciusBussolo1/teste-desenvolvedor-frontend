@@ -1,0 +1,60 @@
+.CreateModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CreateModalContent {
+  background-color: #fff;
+  padding: 2em;
+  border-radius: 7px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  width: 42%;
+  height: 55vh;
+}
+
+.ButtonContainerCreateModal {
+  display: flex;
+  justify-content: center;
+  height: 10%;
+  margin-top: 5em;
+}
+
+.InputContainerCreateModal {
+  display: flex;
+  flex-direction: column;
+  height: 24vh;
+  width: 33vw;
+  border: 1px solid red;
+}
+
+.InputCreateModal {
+  padding: 0.5em;
+  border-radius: 3px;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  height: 4vh;
+}
+
+label {
+  margin-top: 1em;
+}
+
+.SubmitButtonCreateModal {
+  background-color: #0c9bf2;
+  color: white;
+  border-style: none;
+  cursor: pointer;
+  font-weight: 700;
+  width: 12vw;
+  border-radius: 5px;
+}
+
+.SubmitButtonCreateModal:hover {
+  background-color: #0a7ac9;
+}

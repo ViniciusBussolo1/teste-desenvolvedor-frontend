@@ -1,0 +1,73 @@
+table {
+  margin-top: 2em;
+  width: 80vw;
+  border-collapse: collapse;
+}
+
+th {
+  padding: 0.3em 0.5em;
+  text-align: left;
+  border-bottom: 0.1em solid #B6B6B6;
+  font-size: 1em;
+  color: #09242F;
+}
+
+.Name {
+  width: 22%;
+}
+
+.Date {
+  width: 15%;
+}
+
+.Lab {
+  width: 30%;
+}
+
+.Principle {
+  width: 15%;
+}
+
+td {
+  font-size: 0.8em;
+  padding-left: 0.8em;
+  padding-bottom: 0.6em;
+  color: black;
+}
+
+/* Estilo das linhas alternadas */
+tbody tr:nth-child(odd) {
+  background-color: #ffffff; /* Cor da linha ímpar */
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f2f2f2; /* Cor da linha par */
+}
+
+.ActionIcons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between; 
+  font-size: 2rem;
+  width: 3.3em;
+  height: 0.9em;
+}
+
+.EditIcon,
+.TrashIcon {
+  color: white;
+  height: 90%;
+  width: 41%; 
+  padding: 0.16em 0;
+  border-radius: 3px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6); 
+  cursor: pointer;
+}
+
+.EditIcon {
+  background-color: #007bff;
+}
+
+.TrashIcon {
+  background-color: #FF5771;
+}

@@ -1,0 +1,136 @@
+.MenuContainer {
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+  width: 100vw;
+  height: 5.6vh;
+  border: 1px solid rgba(128, 128, 128, 0.3);
+  margin-bottom: 0.3em;
+}
+
+.MenuContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: var(--background-color );
+  color: var(--color);
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-weight: 700;
+  padding-left: 3em;
+  padding-right: 1em;
+}
+
+
+.TitleAndLogo {
+  display: flex;
+  align-items: center;
+  font-size: 1.1rem;
+}
+
+.Logo {
+  max-height: 1em;
+  margin-left: 0.3em;
+}
+
+.MenuIcon {
+  font-size: 1.3rem;
+  cursor: pointer;
+
+}
+
+.SideBarButton {
+  border-style: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.Sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 5vw;
+  height: 100vh;
+  background-color: #09242F;
+  z-index: 999; 
+  display:table-row;
+  justify-content: center;
+  align-items: center;
+}
+
+.SidebarOpen {
+  transform: translateX(0); /* Mostra a sidebar */
+}
+
+.CloseSidebar {
+  transform: translateX(-100%); /* Esconde a sidebar */
+  cursor: pointer;
+  background-color: #09242F;
+}
+
+.CSVButton {
+  margin-top: 4em;
+  cursor: pointer;
+  background-color: transparent;
+  border-style: none;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.CSVIcon {
+  height: 4vh;
+  opacity: 0.9;
+  font-size: 2rem;
+  color: white;
+  border-style: none;
+}
+
+.CreateButton {
+  margin-top: 5em;
+  cursor: pointer;
+  background-color: transparent;
+  border-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 4vh;
+}
+
+.PlusIcon {
+  color: white;
+  font-size: 1.6rem;
+  height: 3.4vh;
+}
+
+.DashboardButton {
+  margin-top: 5em;
+  cursor: pointer;
+  background-color: transparent;
+  border-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 4vh;
+}
+
+.DashboardIcon {
+  color: white;
+  font-size: 1.6rem;
+  height: 3.4vh;
+}
+
+.CSVButton :hover {
+  box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.2);
+}
+
+.CreateButton :hover {
+  box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.4);
+}
+
+.DashboardButton :hover {
+  box-shadow: 0 0 20px 2px rgba(255, 255, 255, 0.4);
+}
