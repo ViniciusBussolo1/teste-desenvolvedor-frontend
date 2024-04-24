@@ -7,12 +7,16 @@ import { Remedy } from '../../context/RemediesProvider'
 import ModalDialog from '../ModalDialog'
 import { RemedyView } from '../RemedyView'
 import { Link } from 'react-router-dom'
+import EmpytMessage from '../EmpytMessage'
 
 interface TableProps {
   remedies: Remedy[]
 }
 
 export function TableListRemedies({ remedies }: TableProps) {
+  if (remedies.length === 0) {
+    return <EmpytMessage message="Não foi encontrado um remédio" />
+  }
   return (
     <TableContainer>
       <thead>
