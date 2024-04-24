@@ -1,31 +1,13 @@
-import React from 'react'
 import { Input } from '../Input'
 import { FormRemedyContainer } from './styles'
-import { useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { z } from 'zod'
-import { useRemedies } from '../../hooks/useRemedies'
+import { UseFormRegister } from 'react-hook-form'
+import { FormRemedySchema } from '../../pages/UpdateRemedy'
 
-const formRemedySchema = z.object({
-  name: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
-  company: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
-})
-type FormRemedySchema = z.infer<typeof formRemedySchema>
+interface FormRemedyProps {
+  registerRemedy: UseFormRegister<FormRemedySchema>
+}
 
-export function FormRemedy() {
-  const { remedy } = useRemedies()
-
-  const defaultValueRemedyName = remedy.name || ''
-  const defaultValueRemedyCompany = remedy.company || ''
-
-  const { register: registerRemedy } = useForm<FormRemedySchema>({
-    resolver: zodResolver(formRemedySchema),
-    defaultValues: {
-      name: defaultValueRemedyName,
-      company: defaultValueRemedyCompany,
-    },
-  })
-
+export function FormRemedy({ registerRemedy }: FormRemedyProps) {
   return (
     <FormRemedyContainer>
       <Input
