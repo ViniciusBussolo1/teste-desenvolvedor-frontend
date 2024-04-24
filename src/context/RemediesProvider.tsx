@@ -4,6 +4,7 @@ import { getListOfRemediesByName } from '../http/getListOfRemediesByName'
 import { getListOfRemediesByCompany } from '../http/getListOfRemediesByCompany'
 import { getRemedy } from '../http/getRemedy'
 import { createRemedy } from '../http/createRemedies'
+import { updateRemedy } from '../http/updateRemedy'
 
 export interface DocumentRemedy {
   id: string
@@ -18,6 +19,14 @@ interface PrincipleActive {
 }
 
 export interface Remedy {
+  id: string
+  name: string
+  published_at: string
+  company: string
+  documents: DocumentRemedy[]
+  principleActives: PrincipleActive[]
+}
+export interface RemedyRequest {
   id: string
   name: string
   published_at: string
@@ -43,6 +52,7 @@ interface RemediesContextProps {
   addDocument: (documentRemedy: DocumentRemedy) => void
   setDocument: (documentRemedy: DocumentRemedy) => void
   deletePrincipleActive: (idPrincipleActive: string) => void
+  updateRemedyProvider: (idRemedy: string, requestRamedy: RemedyRequest) => void
 }
 
 interface RemediesProviderProps {
@@ -80,6 +90,13 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
     )
     setTotalItems(totalItens)
     setRemedies(remediesData)
+  }
+
+  async function updateRemedyProvider(
+    idRemedy: string,
+    requestRamedy: RemedyRequest,
+  ) {
+    await updateRemedy(idRemedy, requestRamedy)
   }
 
   async function getListByCompany(company: string, page: number) {
@@ -161,6 +178,7 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
         addDocument,
         setDocument,
         deletePrincipleActive,
+        updateRemedyProvider,
       }}
     >
       {children}
