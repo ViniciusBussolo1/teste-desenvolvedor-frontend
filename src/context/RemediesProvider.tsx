@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react'
 import { getListOfRemedies } from '../http/getListOfRemedies'
 import { getListOfRemediesByName } from '../http/getListOfRemediesByName'
-import { getListOfRemediesByLaboratory } from '../http/getListOfRemediesByLaboratory'
+import { getListOfRemediesByCompany } from '../http/getListOfRemediesByCompany'
 import { getRemedy } from '../http/getRemedy'
 import { createRemedy } from '../http/createRemedies'
 
@@ -22,12 +22,17 @@ export interface Remedy {
   }[]
 }
 
+interface SearchParams {
+  page: number
+  typeSearch: string
+  searchText: string
+}
+
 interface RemediesContextProps {
   remedies: Remedy[] | never[]
   totalItems: number
-  changePageCurrency: (page: number) => void
-  changeTextSearch: (textSearch: string) => void
-  changeTypeSearch: (typeSearch: string) => void
+  changeSearchParams: (params: SearchParams) => void
+
   getRemedyById: (remedyId: string) => Promise<Remedy>
   addRemedy: (remedyRequest: Remedy) => void
 }
@@ -41,9 +46,10 @@ export const RemediesContext = createContext({} as RemediesContextProps)
 export function RemediesProvider({ children }: RemediesProviderProps) {
   const [remedies, setRemedies] = useState<Remedy | never[]>([])
   const [totalItems, setTotalItems] = useState<number>(1)
-  const [pageCurrecy, setPageCurrecy] = useState<number>(1)
-  const [textSearch, setTextSearch] = useState<string>('')
-  const [typeSearch, setTypeSearch] = useState<string>('')
+
+  const [seachParamsProvider, setSeachParamsProvider] = useState<SearchParams>(
+    {} as SearchParams,
+  )
 
   async function getRemedyById(remedyId: string): Promise<Remedy> {
     const remedy = await getRemedy(remedyId)
@@ -66,7 +72,7 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
     setRemedies(remediesData)
   }
   async function getListByCompany(company: string, page: number) {
-    const { remediesData, totalItens } = await getListOfRemediesByLaboratory(
+    const { remediesData, totalItens } = await getListOfRemediesByCompany(
       company,
       page,
     )
@@ -78,26 +84,19 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
     createRemedy(remedyRequestData)
   }
 
+  function changeSearchParams({ page, searchText, typeSearch }: SearchParams) {
+    setSeachParamsProvider({ page, searchText, typeSearch })
+  }
+
   const getListByParams = useCallback(() => {
-    if (typeSearch === 'company') {
-      getListByCompany(textSearch, pageCurrecy)
-    } else if (typeSearch === 'name') {
-      getListByName(textSearch, pageCurrecy)
-    } else if (!textSearch) {
-      getListAll(pageCurrecy)
+    if (seachParamsProvider.typeSearch === 'company') {
+      getListByCompany(seachParamsProvider.searchText, seachParamsProvider.page)
+    } else if (seachParamsProvider.typeSearch === 'name') {
+      getListByName(seachParamsProvider.searchText, seachParamsProvider.page)
+    } else if (!seachParamsProvider.searchText) {
+      getListAll(seachParamsProvider.page)
     }
-  }, [typeSearch, textSearch, pageCurrecy])
-
-  function changePageCurrency(page: number) {
-    setPageCurrecy(page)
-  }
-
-  function changeTextSearch(textSearch: string) {
-    setTextSearch(textSearch)
-  }
-  function changeTypeSearch(typeSearch: string) {
-    setTypeSearch(typeSearch)
-  }
+  }, [seachParamsProvider])
 
   useEffect(() => {
     getListByParams()
@@ -108,9 +107,7 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
       value={{
         remedies: remedies as Remedy[],
         totalItems,
-        changePageCurrency,
-        changeTextSearch,
-        changeTypeSearch,
+        changeSearchParams,
         getRemedyById,
         addRemedy,
       }}

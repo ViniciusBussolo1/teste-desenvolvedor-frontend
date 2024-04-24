@@ -15,7 +15,7 @@ import {
   InputRadioItem,
   InputRadioRoot,
 } from '../../Components/InputRadio/styles'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
 const searchRemediesSchema = z.object({
   searchText: z.string().min(1, 'Necessário inserir um texto de busca.'),
@@ -26,6 +26,7 @@ type SearchRemediesSchema = z.infer<typeof searchRemediesSchema>
 
 export function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
+  console.log('🚀 ~ Home ~ searchParams:', searchParams)
 
   const searchTextParams = searchParams.get('searchText') || ''
 
@@ -35,13 +36,7 @@ export function Home() {
     ? Number(searchParams.get('page'))
     : 1
 
-  const {
-    remedies,
-    totalItems,
-    changePageCurrency,
-    changeTextSearch,
-    changeTypeSearch,
-  } = useRemedies()
+  const { remedies, totalItems, changeSearchParams } = useRemedies()
 
   const typeSearchParamsValidate =
     typeSearchParams === 'company' ? 'company' : 'name'
@@ -93,18 +88,17 @@ export function Home() {
     setSearchParams({ page: '1' })
   }
 
+  const setSearchParamsProvider = useCallback(() => {
+    changeSearchParams({
+      page: pageCurrency,
+      searchText: searchTextParams,
+      typeSearch: typeSearchParams,
+    })
+  }, [changeSearchParams, pageCurrency, searchTextParams, typeSearchParams])
+
   useEffect(() => {
-    changeTypeSearch(typeSearchParams)
-    changeTextSearch(searchTextParams)
-    changePageCurrency(Number(pageCurrency))
-  }, [
-    searchTextParams,
-    typeSearchParams,
-    pageCurrency,
-    changePageCurrency,
-    changeTypeSearch,
-    changeTextSearch,
-  ])
+    setSearchParamsProvider()
+  }, [setSearchParamsProvider])
 
   if (!remedies) {
     return <p>Loading...</p>
