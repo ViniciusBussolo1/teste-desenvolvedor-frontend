@@ -26,7 +26,6 @@ type SearchRemediesSchema = z.infer<typeof searchRemediesSchema>
 
 export function Home() {
   const [searchParams, setSearchParams] = useSearchParams()
-  console.log('🚀 ~ Home ~ searchParams:', searchParams)
 
   const searchTextParams = searchParams.get('searchText') || ''
 
@@ -94,7 +93,8 @@ export function Home() {
       searchText: searchTextParams,
       typeSearch: typeSearchParams,
     })
-  }, [changeSearchParams, pageCurrency, searchTextParams, typeSearchParams])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [pageCurrency, searchTextParams, typeSearchParams])
 
   useEffect(() => {
     setSearchParamsProvider()
