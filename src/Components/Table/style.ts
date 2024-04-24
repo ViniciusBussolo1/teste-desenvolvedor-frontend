@@ -18,6 +18,7 @@ export const Table = styled.div`
 export const Line = styled.div`
   width: 100%;
   display: flex;
+  justify-content: space-around;
   border-bottom: 1px solid ${(props) => props.theme['gray-400']};
   padding: 0.5rem;
 
