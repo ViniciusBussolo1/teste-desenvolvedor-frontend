@@ -5,5 +5,12 @@ export async function getRemedy(remedyId: string) {
 
   const remedyData = remedyResponse.data
 
-  return remedyData
+  const dataRemedyResponse = {
+    ...remedyData,
+    principleActives: remedyData.active_principles
+      ? remedyData.active_principles
+      : [],
+  }
+
+  return dataRemedyResponse
 }
