@@ -13,10 +13,14 @@ interface RemedyRequestData {
   }[]
   principleActives?: {
     id: string
-    activePrinciple: string
+    name: string
   }[]
 }
 
 export async function createRemedy(remedyRequest: RemedyRequestData) {
-  await api.post('/data', remedyRequest)
+  const dataRemedyRequest = {
+    ...remedyRequest,
+    active_principles: remedyRequest.principleActives,
+  }
+  await api.post('/data', dataRemedyRequest)
 }

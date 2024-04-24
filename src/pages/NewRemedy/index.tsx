@@ -10,7 +10,6 @@ import { FormPrincipleAtive } from '../../Components/FormPricipleActive'
 import ListDocuments from '../../Components/ListDocuments'
 import ListPrincipleActives from '../../Components/ListPrincipleActives'
 import { useState } from 'react'
-import EmpytMessage from '../../Components/EmpytMessage'
 import { useRemedies } from '../../hooks/useRemedies'
 import { toast } from 'sonner'
 import { Link } from 'react-router-dom'
@@ -23,7 +22,7 @@ type FormRemedySchema = z.infer<typeof formRemedySchema>
 
 export interface PrincipleActive {
   id: string
-  activePrinciple: string
+  name: string
 }
 
 export interface DocumentRemedy {
@@ -112,19 +111,12 @@ export function NewRemedy() {
         />
       </HeaderDocuments>
 
-      {!(documents.length === 0) ? (
-        <ListDocuments documents={documents} />
-      ) : (
-        <EmpytMessage message="Não há documentos adicionados." />
-      )}
+      <ListDocuments documents={documents} />
 
+      <h2>Adicionar Principio Ativo:</h2>
       <FormPrincipleAtive addPrincipleActive={addPrincipleActive} />
 
-      {!(principleActives.length === 0) ? (
-        <ListPrincipleActives principleActives={principleActives} />
-      ) : (
-        <EmpytMessage message="Não há ativos adicionados." />
-      )}
+      <ListPrincipleActives principleActives={principleActives} />
 
       <Button onClick={handleSubmitRemedy}>Salvar</Button>
     </NewRemedyContainer>

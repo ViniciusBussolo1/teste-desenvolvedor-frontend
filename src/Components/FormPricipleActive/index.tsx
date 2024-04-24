@@ -7,9 +7,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { PrincipleActive } from '../../pages/NewRemedy'
 
 const formPrincipleAtiveSchema = z.object({
-  activePrinciple: z
-    .string()
-    .min(1, { message: 'Esse campo não pode ser vazio.' }),
+  name: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
 })
 
 type FormPrincipleAtiveSchema = z.infer<typeof formPrincipleAtiveSchema>
@@ -29,30 +27,25 @@ export function FormPrincipleAtive({
     resolver: zodResolver(formPrincipleAtiveSchema),
   })
 
-  function submitPrincipleActive({
-    activePrinciple,
-  }: FormPrincipleAtiveSchema) {
+  function submitPrincipleActive({ name }: FormPrincipleAtiveSchema) {
     addPrincipleActive({
       id: Math.random().toString(),
-      activePrinciple,
+      name,
     })
   }
   return (
-    <>
-      <h2>Adicionar Principio Ativo:</h2>
-      <FormPrincipleAtiveStyle
-        onSubmit={handleSubmitPrincipleActive(submitPrincipleActive)}
-      >
-        <Input
-          placeholder="Digite o nome do Principio Ativo"
-          id="activePrinciple"
-          label="Principio ativo:"
-          htmlFor="activePrinciple"
-          error={errosPrincipleActive.activePrinciple?.message}
-          {...registerPrincipleActive('activePrinciple')}
-        />
-        <Button type="submit">Adicionar principio ativo</Button>
-      </FormPrincipleAtiveStyle>
-    </>
+    <FormPrincipleAtiveStyle
+      onSubmit={handleSubmitPrincipleActive(submitPrincipleActive)}
+    >
+      <Input
+        placeholder="Digite o nome do Principio Ativo"
+        id="activePrinciple"
+        label="Principio ativo:"
+        htmlFor="activePrinciple"
+        error={errosPrincipleActive.activePrinciple?.message}
+        {...registerPrincipleActive('name')}
+      />
+      <Button type="submit">Adicionar principio ativo</Button>
+    </FormPrincipleAtiveStyle>
   )
 }
