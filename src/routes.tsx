@@ -1,5 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom'
-import { Home } from './pages/home'
+import { Home } from './pages/Home'
 import { DefaultLayout } from './layouts/DefaultLayout'
 import { UpdateRemedy } from './pages/UpdateRemedy'
 import { NewRemedy } from './pages/NewRemedy'
