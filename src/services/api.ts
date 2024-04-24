@@ -8,6 +8,6 @@ export const getBulas = async () => {
   return await apiBulas.get("/data");
 };
 
-export const getBulasPaginado = number => {
+export const getBulasPaginado = (number: number) => {
   return apiBulas.get(`/data?_page=${number}`);
 };

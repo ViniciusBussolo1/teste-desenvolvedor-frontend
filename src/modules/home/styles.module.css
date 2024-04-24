@@ -1,9 +1,9 @@
 .main {
   width: 100vw;
   height: 100vh;
-  background-color: #000a06;
   display: flex;
-  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .container {
@@ -11,15 +11,26 @@
   width: 80%;
   height: 15%;
   display: grid;
+  align-items: center;
+  justify-content: center;
   grid-template-columns: 4fr 1fr;
-  gap: 2em;
+  gap: 1em;
   padding: 0 2em;
 }
 
 .select {
   text-align: center;
+  width: 10em;
 }
 
 .select label {
   text: white;
+}
+
+.listBulas {
+  width: 95%;
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
 }

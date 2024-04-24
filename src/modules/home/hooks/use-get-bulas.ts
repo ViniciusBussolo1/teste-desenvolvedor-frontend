@@ -11,11 +11,11 @@ export const useGetBulas = () => {
   });
 };
 
-export const useGetPaginado = () => {
+export const useGetBulasPaginado = (page: number) => {
   return useQuery({
     queryKey: ["paginados"],
     queryFn: async () => {
-      const { data } = await getBulasPaginado("3");
+      const { data } = await getBulasPaginado(page);
       return data;
     },
   });

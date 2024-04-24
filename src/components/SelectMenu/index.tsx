@@ -1,26 +1,31 @@
+import { ControllerRenderProps, FieldValues } from "react-hook-form";
 import Select from "react-select";
 
-type MenuSelectProps<T> = {
-  options: T[];
+type Options = {
+  value: string;
+  label: string;
+};
+type MenuSelectProps = {
+  options: Options[];
+  field: ControllerRenderProps<FieldValues, "select">;
 };
 
-export const MenuSelect = <T extends { value: string; label: string }>({
-  options,
-}: MenuSelectProps<T>) => {
+export const MenuSelect = (props: MenuSelectProps) => {
+  const { options, field } = props;
   return (
     <Select
+      {...field}
       options={options}
       styles={{
         control: baseStyles => ({
           ...baseStyles,
-          backgroundColor: "#000a06",
+          boxShadow: "0px 2px 3px 0px;",
           cursor: "pointer",
           height: "3em",
         }),
 
         singleValue: provided => ({
           ...provided,
-          color: "#ffff", // Cor do texto do valor selecionado
         }),
       }}
     />
