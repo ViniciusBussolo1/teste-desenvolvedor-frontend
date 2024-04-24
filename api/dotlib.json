@@ -926,8 +926,8 @@
     {
       "id": "0.18272805671146708",
       "published_at": "2024-04-24T12:24:46.458Z",
-      "company": "",
-      "name": "",
+      "company": "EMS",
+      "name": "AMOXILINA",
       "principleActives": [
         {
           "id": "d9ba4a5c-f812-4a32-ab89-688ceb09990e",
@@ -938,16 +938,16 @@
           "name": "CLAVULANATO DE POTÁSSIO"
         },
         {
-          "id": "0.33007628791597",
+          "id": "0.22981049330605474",
           "name": "Dipirona"
         }
       ],
       "documents": [
         {
-          "id": "aeca6992-021e-4445-a5aa-3f915581182c",
           "expedient": "0583187234",
-          "type": "PROFESSIONAL",
-          "url": "http://localhost:3000/pdf_sample.pdf"
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "aeca6992-021e-4445-a5aa-3f915581182c"
         },
         {
           "id": "ca5a33fb-fe42-4b8b-a967-c379368a2285",
@@ -966,7 +966,7 @@
           "name": "CLAVULANATO DE POTÁSSIO"
         },
         {
-          "id": "0.33007628791597",
+          "id": "0.22981049330605474",
           "name": "Dipirona"
         }
       ]
