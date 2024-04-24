@@ -23,8 +23,8 @@ export interface Remedy {
   name: string
   published_at: string
   company: string
-  documents: DocumentRemedy[]
-  principleActives: PrincipleActive[]
+  documents: DocumentRemedy[] | []
+  principleActives: PrincipleActive[] | []
 }
 export interface RemedyRequest {
   id: string
@@ -53,6 +53,7 @@ interface RemediesContextProps {
   setDocument: (documentRemedy: DocumentRemedy) => void
   deletePrincipleActive: (idPrincipleActive: string) => void
   updateRemedyProvider: (idRemedy: string, requestRamedy: RemedyRequest) => void
+  clearRemedy: () => void
 }
 
 interface RemediesProviderProps {
@@ -81,6 +82,17 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
 
     setTotalItems(totalItens)
     setRemedies(remediesData)
+  }
+
+  function clearRemedy() {
+    setRemedy({
+      principleActives: [],
+      documents: [],
+      id: '',
+      name: '',
+      published_at: '',
+      company: '',
+    } as Remedy)
   }
 
   async function getListByName(name: string, page: number) {
@@ -179,6 +191,7 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
         setDocument,
         deletePrincipleActive,
         updateRemedyProvider,
+        clearRemedy,
       }}
     >
       {children}
