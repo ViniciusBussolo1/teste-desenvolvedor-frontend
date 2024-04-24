@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { InputSearch } from "../../components/InputSearch";
 import { MenuSelect } from "../../components/SelectMenu";
 import styles from "./styles.module.css";
@@ -20,7 +19,10 @@ export const Bulario = () => {
     <>
       <div className={styles.main}>
         <form onSubmit={handleSubmit} className={styles.container}>
-          <InputSearch {...register("content")} />
+          <InputSearch
+            {...register("content")}
+            placeholder="Digite o nome do medicamento ou laboratório"
+          />
 
           <div className={styles.select}>
             <Controller

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { MedicineData } from "../../modules/home/types";
 
@@ -7,7 +7,9 @@ export const Paginacao = ({ items }: { items: MedicineData[] }) => {
   const itemsPorPagina = 10;
   const startIndex = (currentPage - 1) * itemsPorPagina;
   const endIndex = startIndex != 0 ? startIndex + itemsPorPagina : 10;
-  const currentItems = items.slice(startIndex, endIndex);
+  const currentItems = items
+    .slice(startIndex, endIndex)
+    .sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
 
   const nextPage = () => {
     setCurrentPage(currentPage + 1);
@@ -17,6 +19,9 @@ export const Paginacao = ({ items }: { items: MedicineData[] }) => {
     setCurrentPage(currentPage - 1);
   };
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [items]);
   return (
     <>
       <table>

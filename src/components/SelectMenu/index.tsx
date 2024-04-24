@@ -15,6 +15,7 @@ export const MenuSelect = (props: MenuSelectProps) => {
   return (
     <Select
       {...field}
+      defaultValue={options[0]}
       options={options}
       styles={{
         control: baseStyles => ({

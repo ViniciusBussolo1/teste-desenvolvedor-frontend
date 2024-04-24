@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useForm } from "react-hook-form";
 import { useGetBulas } from "./use-get-bulas";
 import { useState } from "react";
@@ -11,33 +10,41 @@ type dataRequest = {
 
 export const useBulas = () => {
   const { data: bulas } = useGetBulas();
-
-  const { register, handleSubmit, control } = useForm();
+  const { register, handleSubmit, control } = useForm<dataRequest>();
   const [bulasFiltradas, setbulasFiltradas] = useState<MedicineData[]>([]);
 
   const onSubmit = (dataSubmit: dataRequest) => {
     const { content } = dataSubmit;
-    const select = dataSubmit?.select.value;
+    const contentUpper = content.toUpperCase();
+
+    const select = dataSubmit?.select?.value ? dataSubmit?.select.value : "Todos";
 
     switch (select) {
       case "medicamento":
         setbulasFiltradas(
-          bulas.filter(el => {
-            return el.name.toUpperCase().includes(content.toUpperCase());
+          bulas.filter((el: MedicineData) => {
+            return el.name.toUpperCase().includes(contentUpper);
           })
         );
         break;
 
       case "laboratorio":
         setbulasFiltradas(
-          bulas.filter(el => {
-            return el.company.toUpperCase().includes(content.toUpperCase());
+          bulas.filter((el: MedicineData) => {
+            return el.company.toUpperCase().includes(contentUpper);
           })
         );
         break;
 
       default:
-        setbulasFiltradas(bulas);
+        setbulasFiltradas(
+          bulas.filter((el: MedicineData) => {
+            return (
+              el.company.toUpperCase().includes(contentUpper) ||
+              el.name.toUpperCase().includes(contentUpper)
+            );
+          })
+        );
         break;
     }
   };
