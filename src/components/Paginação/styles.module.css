@@ -46,14 +46,14 @@ tr:nth-child(even) {
 }
 
 td .listContainer {
-  max-height: 100px; /* Defina a altura máxima desejada */
-  overflow: auto; /* Adicione rolagem se necessário */
+  max-height: 100px;
+  overflow: auto;
 }
 
 td ul {
-  list-style-type: disc; /* ou outra forma de marcador, como circle ou square */
-  margin: 0; /* Remova a margem padrão da lista */
-  padding-left: 20px; /* Adicione um recuo para o marcador */
+  list-style-type: disc;
+  margin: 0;
+  padding-left: 20px;
 }
 
 .actions {
@@ -69,4 +69,22 @@ td ul {
   width: 40px;
   cursor: pointer;
   border-radius: 4px;
+  color: #ffff;
+  font-weight: 700;
+}
+
+.actions > :first-child button {
+  background-color: #118e11;
+}
+
+.actions > :nth-child(2) button {
+  background-color: #d54242;
+}
+
+.actions > :first-child button:hover {
+  background-color: #2bb92b;
+}
+
+.actions > :nth-child(2) button:hover {
+  background-color: #ec6363;
 }

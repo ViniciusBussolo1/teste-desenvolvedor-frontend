@@ -49,12 +49,12 @@ export const Paginacao = ({ items }: { items: MedicineData[] }) => {
                 <td className={styles.actions}>
                   {bulasPacientes && (
                     <a href={bulasPacientes.url} target="blank">
-                      <button>P</button>
+                      <button title="Bula para pacientes">P</button>
                     </a>
                   )}
                   {bulasProfissionais && (
                     <a href={bulasProfissionais.url} target="blank">
-                      <button>M</button>
+                      <button title="Bula para profissionais da saúde">M</button>
                     </a>
                   )}
                 </td>
