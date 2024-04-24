@@ -16,33 +16,20 @@ export interface Remedy {
     type: 'PROFESSIONAL' | 'PATIENT'
     url: string
   }[]
-}
-
-interface RemedyRequestData {
-  id: string
-  name: string
-  published_at: string
-  company: string
-  documents: {
+  principleActives: {
     id: string
-    expedient: string
-    type: 'PROFESSIONAL' | 'PATIENT'
-    url: string
-  }[]
-  principleActives?: {
-    id: string
-    activePrinciple: string
+    name: string
   }[]
 }
 
 interface RemediesContextProps {
-  remedies: Remedy[]
+  remedies: Remedy[] | never[]
   totalItems: number
   changePageCurrency: (page: number) => void
   changeTextSearch: (textSearch: string) => void
   changeTypeSearch: (typeSearch: string) => void
   getRemedyById: (remedyId: string) => Promise<Remedy>
-  addRemedy: (remedyRequest: RemedyRequestData) => void
+  addRemedy: (remedyRequest: Remedy) => void
 }
 
 interface RemediesProviderProps {
@@ -52,7 +39,7 @@ interface RemediesProviderProps {
 export const RemediesContext = createContext({} as RemediesContextProps)
 
 export function RemediesProvider({ children }: RemediesProviderProps) {
-  const [remedies, setRemedies] = useState<Remedy>([])
+  const [remedies, setRemedies] = useState<Remedy | never[]>([])
   const [totalItems, setTotalItems] = useState<number>(1)
   const [pageCurrecy, setPageCurrecy] = useState<number>(1)
   const [textSearch, setTextSearch] = useState<string>('')
@@ -87,7 +74,7 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
     setRemedies(remediesData)
   }
 
-  async function addRemedy(remedyRequestData: RemedyRequestData) {
+  async function addRemedy(remedyRequestData: Remedy) {
     createRemedy(remedyRequestData)
   }
 
@@ -119,7 +106,7 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
   return (
     <RemediesContext.Provider
       value={{
-        remedies,
+        remedies: remedies as Remedy[],
         totalItems,
         changePageCurrency,
         changeTextSearch,
