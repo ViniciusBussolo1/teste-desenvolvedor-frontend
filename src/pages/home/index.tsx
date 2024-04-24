@@ -1,12 +1,12 @@
-import { Button } from '../../Components/Button'
-import { Input } from '../../Components/Input'
-import { TableListRemedies } from '../../Components/TableListRemedies'
+import { Button } from '../../components/Button'
+import { Input } from '../../components/Input'
+import { TableListRemedies } from '../../components/TableListRemedies'
 import { ContainerButtons, ContainerInputs, HomeContainer } from './styles'
 import { MagnifyingGlass } from 'phosphor-react'
 import { z } from 'zod'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Pagination } from '../../Components/Pagination'
+import { Pagination } from '../../components/Pagination'
 import { useSearchParams } from 'react-router-dom'
 import { useRemedies } from '../../hooks/useRemedies'
 
@@ -14,7 +14,7 @@ import {
   InputRadioIndicator,
   InputRadioItem,
   InputRadioRoot,
-} from '../../Components/InputRadio/styles'
+} from '../../components/InputRadio/styles'
 import { useCallback, useEffect } from 'react'
 
 const searchRemediesSchema = z.object({
