@@ -6,18 +6,18 @@
   font-weight: 700;
 }
 
-.buttonDownloadPrimary {
+.primary {
   background-color: #118e11;
 }
 
-.buttonDownloadPrimary:hover {
+.primary:hover {
   background-color: #2bb92b;
 }
 
-.buttonDownloadSecondary {
+.secondary {
   background-color: #d54242;
 }
 
-.buttonDownloadSecondary:hover {
+.secondary:hover {
   background-color: #ec6363;
 }
