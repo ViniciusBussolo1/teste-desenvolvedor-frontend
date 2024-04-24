@@ -5,7 +5,7 @@ import { HeaderDocuments, UpdateFormContainer } from './styles'
 import { FormPrincipleAtive } from '../../components/FormPricipleActive'
 import ListDocuments from '../../components/ListDocuments'
 import ListPrincipleActives from '../../components/ListPrincipleActives'
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useRemedies } from '../../hooks/useRemedies'
 import { Link, useParams } from 'react-router-dom'
 import { FormRemedy } from '../../components/FormRemedy'
@@ -33,6 +33,7 @@ const formRemedySchema = z.object({
 export type FormRemedySchema = z.infer<typeof formRemedySchema>
 
 export function UpdateRemedy() {
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
   const { id } = useParams()
 
   const { getRemedyById, remedy, updateRemedyProvider } = useRemedies()
@@ -70,6 +71,10 @@ export function UpdateRemedy() {
     } catch (error) {}
   }
 
+  function closedModal() {
+    setIsOpenModal(false)
+  }
+
   const getRemedy = useCallback(async () => {
     if (id) {
       getRemedyById(id)
@@ -91,10 +96,12 @@ export function UpdateRemedy() {
       <HeaderDocuments>
         <h2>Documentos:</h2>
         <ModalDialog
+          openModal={isOpenModal}
+          onOpenChangeModal={setIsOpenModal}
           buttonOpenModal={
             <Button variant="success">Adicionar documento </Button>
           }
-          ContentModal={<FormDocument />}
+          ContentModal={<FormDocument closedModal={closedModal} />}
         />
       </HeaderDocuments>
       <ListDocuments />
