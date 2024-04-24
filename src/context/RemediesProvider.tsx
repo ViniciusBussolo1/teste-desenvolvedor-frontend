@@ -5,17 +5,19 @@ import { getListOfRemediesByCompany } from '../http/getListOfRemediesByCompany'
 import { getRemedy } from '../http/getRemedy'
 import { createRemedy } from '../http/createRemedies'
 
+export interface DocumentRemedy {
+  id: string
+  expedient: string
+  type: 'PROFESSIONAL' | 'PATIENT'
+  url: string
+}
+
 export interface Remedy {
   id: string
   name: string
   published_at: string
   company: string
-  documents: {
-    id: string
-    expedient: string
-    type: 'PROFESSIONAL' | 'PATIENT'
-    url: string
-  }[]
+  documents: DocumentRemedy[]
   principleActives: {
     id: string
     name: string
@@ -32,9 +34,11 @@ interface RemediesContextProps {
   remedies: Remedy[] | never[]
   totalItems: number
   changeSearchParams: (params: SearchParams) => void
-
+  remedy: Remedy
   getRemedyById: (remedyId: string) => Promise<Remedy>
   addRemedy: (remedyRequest: Remedy) => void
+  addDocument: (documentRemedy: DocumentRemedy) => void
+  setDocument: (documentRemedy: DocumentRemedy) => void
 }
 
 interface RemediesProviderProps {
@@ -46,13 +50,15 @@ export const RemediesContext = createContext({} as RemediesContextProps)
 export function RemediesProvider({ children }: RemediesProviderProps) {
   const [remedies, setRemedies] = useState<Remedy | never[]>([])
   const [totalItems, setTotalItems] = useState<number>(1)
+  const [remedy, setRemedy] = useState<Remedy>({} as Remedy)
 
   const [seachParamsProvider, setSeachParamsProvider] = useState<SearchParams>(
     {} as SearchParams,
   )
 
   async function getRemedyById(remedyId: string): Promise<Remedy> {
-    const remedy = await getRemedy(remedyId)
+    const remedyData = await getRemedy(remedyId)
+    setRemedy(remedyData)
     return remedy
   }
 
@@ -71,6 +77,7 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
     setTotalItems(totalItens)
     setRemedies(remediesData)
   }
+
   async function getListByCompany(company: string, page: number) {
     const { remediesData, totalItens } = await getListOfRemediesByCompany(
       company,
@@ -78,6 +85,26 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
     )
     setTotalItems(totalItens)
     setRemedies(remediesData)
+  }
+
+  function addDocument(documentRemedy: DocumentRemedy) {
+    setRemedy((prevRemedy) => ({
+      ...prevRemedy,
+      documents: [...prevRemedy.documents, documentRemedy],
+    }))
+  }
+
+  function setDocument(documentRemedy: DocumentRemedy) {
+    setRemedy((prevRemedy) => ({
+      ...prevRemedy,
+      documents: prevRemedy.documents.map((document) => {
+        if (document.id === documentRemedy.id) {
+          return documentRemedy
+        } else {
+          return document
+        }
+      }),
+    }))
   }
 
   async function addRemedy(remedyRequestData: Remedy) {
@@ -106,10 +133,13 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
     <RemediesContext.Provider
       value={{
         remedies: remedies as Remedy[],
+        remedy,
         totalItems,
         changeSearchParams,
         getRemedyById,
         addRemedy,
+        addDocument,
+        setDocument,
       }}
     >
       {children}

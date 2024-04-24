@@ -9,7 +9,8 @@ import { Button } from '../Button'
 import { Controller, useForm } from 'react-hook-form'
 import z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { DocumentRemedy } from '../../pages/NewRemedy'
+import { useRemedies } from '../../hooks/useRemedies'
+import { DocumentRemedy } from '../../context/RemediesProvider'
 
 const formDocumentSchema = z.object({
   expedient: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
@@ -23,10 +24,18 @@ const formDocumentSchema = z.object({
 type FormDocumentSchema = z.infer<typeof formDocumentSchema>
 
 interface FormDocumentProps {
-  addDocument: (document: DocumentRemedy) => void
+  document?: DocumentRemedy
 }
 
-export function FormDocument({ addDocument }: FormDocumentProps) {
+export function FormDocument({ document }: FormDocumentProps) {
+  const { addDocument, setDocument } = useRemedies()
+
+  const documentId = document?.id
+
+  const defaulfValueType = document?.type || 'PATIENT'
+  const defaulfValueExpedient = document?.expedient || ''
+  const defaulfValueUrl = document?.url || ''
+
   const {
     register,
     handleSubmit,
@@ -35,23 +44,33 @@ export function FormDocument({ addDocument }: FormDocumentProps) {
   } = useForm<FormDocumentSchema>({
     resolver: zodResolver(formDocumentSchema),
     defaultValues: {
-      expedient: '',
-      type: 'PATIENT',
-      url: '',
+      expedient: defaulfValueExpedient,
+      url: defaulfValueUrl,
     },
   })
 
-  function SubmitFormDocument({ expedient, type, url }: FormDocumentSchema) {
-    const document: DocumentRemedy = {
-      expedient,
-      type,
-      url,
-      id: Math.random().toString(),
+  function submitFormDocument({ expedient, type, url }: FormDocumentSchema) {
+    if (documentId) {
+      const document: DocumentRemedy = {
+        expedient,
+        type,
+        url,
+        id: documentId,
+      }
+      setDocument(document)
+    } else {
+      const document: DocumentRemedy = {
+        expedient,
+        type,
+        url,
+        id: Math.random().toString(),
+      }
+
+      addDocument(document)
     }
-    addDocument(document)
   }
   return (
-    <FormDocumentContainer onSubmit={handleSubmit(SubmitFormDocument)}>
+    <FormDocumentContainer onSubmit={handleSubmit(submitFormDocument)}>
       <Input
         placeholder="Digite o número do registro"
         label="Registro:"
@@ -78,7 +97,7 @@ export function FormDocument({ addDocument }: FormDocumentProps) {
               name={name}
               ref={ref}
               onValueChange={onChange}
-              defaultValue="PATIENT"
+              defaultValue={defaulfValueType}
             >
               <ContainerRadio>
                 <div>
@@ -98,7 +117,11 @@ export function FormDocument({ addDocument }: FormDocumentProps) {
           )}
         />
       </div>
-      <Button type="submit">Criar Documento</Button>
+      {document ? (
+        <Button type="submit">Alterar Documento</Button>
+      ) : (
+        <Button type="submit">Criar Documento</Button>
+      )}
     </FormDocumentContainer>
   )
 }
