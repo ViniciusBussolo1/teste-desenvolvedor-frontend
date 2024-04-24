@@ -4,6 +4,7 @@ import { Button } from '../Button'
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useRemedies } from '../../hooks/useRemedies'
 
 const formPrincipleAtiveSchema = z.object({
   name: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
@@ -12,6 +13,7 @@ const formPrincipleAtiveSchema = z.object({
 type FormPrincipleAtiveSchema = z.infer<typeof formPrincipleAtiveSchema>
 
 export function FormPrincipleAtive() {
+  const { addPrincipleActive } = useRemedies()
   const {
     register: registerPrincipleActive,
     handleSubmit: handleSubmitPrincipleActive,
@@ -21,7 +23,11 @@ export function FormPrincipleAtive() {
   })
 
   function submitPrincipleActive({ name }: FormPrincipleAtiveSchema) {
-    console.log('🚀 ~ submitPrincipleActive ~ name:', name)
+    const principleActive = {
+      id: Math.random().toString(),
+      name,
+    }
+    addPrincipleActive(principleActive)
   }
   return (
     <FormPrincipleAtiveStyle
