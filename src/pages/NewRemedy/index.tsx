@@ -13,6 +13,7 @@ import { toast } from 'sonner'
 import { Link } from 'react-router-dom'
 import { FormRemedy } from '../../components/FormRemedy'
 import { useEffect, useState } from 'react'
+import { Plus } from 'phosphor-react'
 
 const formRemedySchema = z.object({
   name: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
@@ -88,7 +89,10 @@ export function NewRemedy() {
           openModal={isOpenModal}
           onOpenChangeModal={setIsOpenModal}
           buttonOpenModal={
-            <Button variant="success">Adicionar documento </Button>
+            <Button variant="success">
+              <Plus weight="bold" />
+              Adicionar documento
+            </Button>
           }
           ContentModal={<FormDocument closedModal={closedModal} />}
         />
@@ -101,7 +105,9 @@ export function NewRemedy() {
 
       <ListPrincipleActives />
 
-      <Button onClick={handleSubmitRemedy}>Salvar</Button>
+      <Button onClick={handleSubmitRemedy} variant="success">
+        Salvar
+      </Button>
     </NewRemedyContainer>
   )
 }

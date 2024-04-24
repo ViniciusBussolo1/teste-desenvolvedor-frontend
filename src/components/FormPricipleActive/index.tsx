@@ -5,6 +5,7 @@ import { z } from 'zod'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useRemedies } from '../../hooks/useRemedies'
+import { Plus } from 'phosphor-react'
 
 const formPrincipleAtiveSchema = z.object({
   name: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
@@ -41,7 +42,10 @@ export function FormPrincipleAtive() {
         error={errosPrincipleActive.name?.message}
         {...registerPrincipleActive('name')}
       />
-      <Button type="submit">Adicionar principio ativo</Button>
+      <Button type="submit" variant="success">
+        <Plus weight="bold" />
+        Adicionar principio ativo
+      </Button>
     </FormPrincipleAtiveStyle>
   )
 }
