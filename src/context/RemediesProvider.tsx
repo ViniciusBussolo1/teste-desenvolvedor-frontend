@@ -12,16 +12,18 @@ export interface DocumentRemedy {
   url: string
 }
 
+interface PrincipleActive {
+  id: string
+  name: string
+}
+
 export interface Remedy {
   id: string
   name: string
   published_at: string
   company: string
   documents: DocumentRemedy[]
-  principleActives: {
-    id: string
-    name: string
-  }[]
+  principleActives: PrincipleActive[]
 }
 
 interface SearchParams {
@@ -37,8 +39,10 @@ interface RemediesContextProps {
   remedy: Remedy
   getRemedyById: (remedyId: string) => Promise<Remedy>
   addRemedy: (remedyRequest: Remedy) => void
+  addPrincipleActive: (principleActive: PrincipleActive) => void
   addDocument: (documentRemedy: DocumentRemedy) => void
   setDocument: (documentRemedy: DocumentRemedy) => void
+  deletePrincipleActive: (idPrincipleActive: string) => void
 }
 
 interface RemediesProviderProps {
@@ -87,6 +91,12 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
     setRemedies(remediesData)
   }
 
+  function addPrincipleActive(principleActive: PrincipleActive) {
+    setRemedy((prevRemedy) => ({
+      ...prevRemedy,
+      principleActives: [...prevRemedy.principleActives, principleActive],
+    }))
+  }
   function addDocument(documentRemedy: DocumentRemedy) {
     setRemedy((prevRemedy) => ({
       ...prevRemedy,
@@ -109,6 +119,15 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
 
   async function addRemedy(remedyRequestData: Remedy) {
     createRemedy(remedyRequestData)
+  }
+
+  async function deletePrincipleActive(idPrincipleActive: string) {
+    setRemedy((prevRemedy) => ({
+      ...prevRemedy,
+      principleActives: prevRemedy.principleActives.filter(
+        (principleActive) => principleActive.id !== idPrincipleActive,
+      ),
+    }))
   }
 
   function changeSearchParams({ page, searchText, typeSearch }: SearchParams) {
@@ -138,8 +157,10 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
         changeSearchParams,
         getRemedyById,
         addRemedy,
+        addPrincipleActive,
         addDocument,
         setDocument,
+        deletePrincipleActive,
       }}
     >
       {children}
