@@ -2,11 +2,11 @@ import { useEffect, useState } from "react";
 import styles from "./styles.module.css";
 import { MedicineData } from "../../modules/home/types";
 
-export const Paginacao = ({ items }: { items: MedicineData[] }) => {
+export const Pagination = ({ items }: { items: MedicineData[] }) => {
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPorPagina = 10;
-  const startIndex = (currentPage - 1) * itemsPorPagina;
-  const endIndex = startIndex != 0 ? startIndex + itemsPorPagina : 10;
+  const itemsPerPage = 10;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex != 0 ? startIndex + itemsPerPage : 10;
   const currentItems = items
     .slice(startIndex, endIndex)
     .sort((a, b) => new Date(b.published_at).getTime() - new Date(a.published_at).getTime());
@@ -45,17 +45,15 @@ export const Paginacao = ({ items }: { items: MedicineData[] }) => {
                 <td>
                   <div className={styles.listContainer}>
                     <ul>
-                      {bula.active_principles.map(principioAtivo => {
-                        return <li>{principioAtivo.name}</li>;
+                      {bula.active_principles.map(activePrinciples => {
+                        return <li>{activePrinciples.name}</li>;
                       })}
                     </ul>
                   </div>
                 </td>
                 <td className={styles.actions}>
                   {bulasPacientes && (
-                    <a href={bulasPacientes.url} target="blank">
-                      <button title="Bula para pacientes">P</button>
-                    </a>
+                   
                   )}
                   {bulasProfissionais && (
                     <a href={bulasProfissionais.url} target="blank">

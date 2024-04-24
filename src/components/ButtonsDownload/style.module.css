@@ -1,0 +1,23 @@
+.buttonDownload {
+  width: 40px;
+  cursor: pointer;
+  border-radius: 4px;
+  color: #ffff;
+  font-weight: 700;
+}
+
+.buttonDownloadPrimary {
+  background-color: #118e11;
+}
+
+.buttonDownloadPrimary:hover {
+  background-color: #2bb92b;
+}
+
+.buttonDownloadSecondary {
+  background-color: #d54242;
+}
+
+.buttonDownloadSecondary:hover {
+  background-color: #ec6363;
+}

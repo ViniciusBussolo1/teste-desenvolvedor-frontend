@@ -1,10 +1,10 @@
 import { InputSearch } from "../../components/InputSearch";
 import { MenuSelect } from "../../components/SelectMenu";
 import styles from "./styles.module.css";
-import { Paginacao } from "../../components/Paginação";
+import { Pagination } from "../../components/Pagination";
 import { Controller } from "react-hook-form";
 
-import { useBulas } from "./hooks/use-Bulas";
+import { useDrugLabel } from "./hooks/use-Drug-Label";
 
 const options = [
   { value: "todos", label: "Todos" },
@@ -13,7 +13,7 @@ const options = [
 ];
 
 export const Bulario = () => {
-  const { register, handleSubmit, control, bulasFiltradas } = useBulas();
+  const { register, handleSubmit, control, filteredDrugLabels } = useDrugLabel();
 
   return (
     <>
@@ -34,7 +34,7 @@ export const Bulario = () => {
         </form>
 
         <section className={styles.listBulas}>
-          <Paginacao items={bulasFiltradas} />
+          <Pagination items={filteredDrugLabels} />
         </section>
       </div>
     </>

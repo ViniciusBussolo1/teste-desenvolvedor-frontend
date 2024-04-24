@@ -1,17 +1,17 @@
 import { useForm } from "react-hook-form";
-import { useGetBulas } from "./use-get-bulas";
+import { useGetDrugLabel } from "./use-get-drug-label";
 import { useState } from "react";
 import { MedicineData } from "../types";
 
-type dataRequest = {
+export type dataRequest = {
   content: string;
   select: { value: string; label: string };
 };
 
-export const useBulas = () => {
-  const { data: bulas } = useGetBulas();
+export const useDrugLabel = () => {
+  const { data: bulas } = useGetDrugLabel();
   const { register, handleSubmit, control } = useForm<dataRequest>();
-  const [bulasFiltradas, setbulasFiltradas] = useState<MedicineData[]>([]);
+  const [filteredDrugLabels, setFilteredDrugLabels] = useState<MedicineData[]>([]);
 
   const onSubmit = (dataSubmit: dataRequest) => {
     const { content } = dataSubmit;
@@ -21,7 +21,7 @@ export const useBulas = () => {
 
     switch (select) {
       case "medicamento":
-        setbulasFiltradas(
+        setFilteredDrugLabels(
           bulas.filter((el: MedicineData) => {
             return el.name.toUpperCase().includes(contentUpper);
           })
@@ -29,7 +29,7 @@ export const useBulas = () => {
         break;
 
       case "laboratorio":
-        setbulasFiltradas(
+        setFilteredDrugLabels(
           bulas.filter((el: MedicineData) => {
             return el.company.toUpperCase().includes(contentUpper);
           })
@@ -37,7 +37,7 @@ export const useBulas = () => {
         break;
 
       default:
-        setbulasFiltradas(
+        setFilteredDrugLabels(
           bulas.filter((el: MedicineData) => {
             return (
               el.company.toUpperCase().includes(contentUpper) ||
@@ -53,6 +53,6 @@ export const useBulas = () => {
     register,
     handleSubmit: handleSubmit(onSubmit),
     control,
-    bulasFiltradas,
+    filteredDrugLabels,
   };
 };

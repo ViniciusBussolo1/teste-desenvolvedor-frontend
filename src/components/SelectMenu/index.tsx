@@ -1,5 +1,6 @@
-import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { ControllerRenderProps } from "react-hook-form";
 import Select from "react-select";
+import { dataRequest } from "../../modules/home/hooks/use-Drug-Label";
 
 type Options = {
   value: string;
@@ -7,7 +8,7 @@ type Options = {
 };
 type MenuSelectProps = {
   options: Options[];
-  field: ControllerRenderProps<FieldValues, "select">;
+  field: ControllerRenderProps<dataRequest, "select">;
 };
 
 export const MenuSelect = (props: MenuSelectProps) => {
