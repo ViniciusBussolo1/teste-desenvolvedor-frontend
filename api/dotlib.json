@@ -671,10 +671,10 @@
       "published_at": "2024-04-23T18:25:45.047Z",
       "company": "EMS",
       "name": "AMOXILINA",
-      "principleActives": [
+      "active_principles": [
         {
           "id": "0.5662603577009513",
-          "activePrinciple": "Dipirona"
+          "name": "Dipirona"
         }
       ],
       "documents": [
@@ -691,10 +691,10 @@
       "published_at": "2024-04-23T18:33:11.495Z",
       "company": "CRISTÁLIA PRODUTOS QUÍMICOS FARMACÊUTICOS LTDA.",
       "name": "ACEZO",
-      "principleActives": [
+      "active_principles": [
         {
           "id": "0.11017039204955514",
-          "activePrinciple": "Dipirona"
+          "name": "Dipirona"
         }
       ],
       "documents": [
@@ -711,10 +711,10 @@
       "published_at": "2024-04-23T18:33:29.113Z",
       "company": "CRISTÁLIA PRODUTOS QUÍMICOS FARMACÊUTICOS LTDA.",
       "name": "ACEZO",
-      "principleActives": [
+      "active_principles": [
         {
           "id": "0.11017039204955514",
-          "activePrinciple": "Dipirona"
+          "name": "Dipirona"
         }
       ],
       "documents": [
@@ -731,7 +731,7 @@
       "published_at": "2024-04-23T18:41:02.349Z",
       "company": "MULTILAB INDUSTRIA E COMERCIO DE PRODUTOS FARMACEUTICOS LTDA",
       "name": "AMOXICILINA",
-      "principleActives": [],
+      "active_principles": [],
       "documents": [
         {
           "expedient": "165151356",
@@ -746,10 +746,10 @@
       "published_at": "2024-04-23T18:44:16.291Z",
       "company": "EMS",
       "name": "AMOXILINA",
-      "principleActives": [
+      "active_principles": [
         {
           "id": "0.21386179887941714",
-          "activePrinciple": "Dipirona"
+          "name": "Dipirona"
         }
       ],
       "documents": [
@@ -766,10 +766,10 @@
       "published_at": "2024-04-23T18:46:22.727Z",
       "company": "EMS",
       "name": "ALPRAZOLAM",
-      "principleActives": [
+      "active_principles": [
         {
           "id": "0.5440329324136779",
-          "activePrinciple": "Dipirona"
+          "name": "Dipirona"
         }
       ],
       "documents": [
@@ -786,7 +786,7 @@
       "published_at": "2024-04-23T18:53:22.659Z",
       "company": "EMS",
       "name": "AMOXILINA",
-      "principleActives": [],
+      "active_principles": [],
       "documents": [
         {
           "expedient": "613232",
@@ -807,10 +807,10 @@
       "published_at": "2024-04-23T18:54:14.222Z",
       "company": "CIMED",
       "name": "ALPRAZOLAM",
-      "principleActives": [
+      "active_principles": [
         {
           "id": "0.34366881937168814",
-          "activePrinciple": "Dipirona"
+          "name": "Dipirona"
         }
       ],
       "documents": [
@@ -827,7 +827,7 @@
       "published_at": "2024-04-23T18:55:51.052Z",
       "company": "ACIMED",
       "name": "ALPRAZOLAM",
-      "principleActives": [],
+      "active_principles": [],
       "documents": [
         {
           "expedient": "496151321",
@@ -842,7 +842,7 @@
       "published_at": "2024-04-23T19:00:29.847Z",
       "company": "EMS",
       "name": "ALPRAZOLAM",
-      "principleActives": [],
+      "active_principles": [],
       "documents": [
         {
           "expedient": "461323213",
@@ -857,7 +857,7 @@
       "published_at": "2024-04-23T19:00:49.904Z",
       "company": "EMS",
       "name": "ALPRAZOLAM",
-      "principleActives": [],
+      "active_principles": [],
       "documents": [
         {
           "expedient": "461323213",
@@ -872,7 +872,7 @@
       "published_at": "2024-04-23T19:01:11.934Z",
       "company": "CIMED",
       "name": "ALPRAZOLAM",
-      "principleActives": [],
+      "active_principles": [],
       "documents": [
         {
           "expedient": "Amoxilina",
@@ -887,13 +887,87 @@
       "published_at": "2024-04-23T19:02:27.740Z",
       "company": "CIMED",
       "name": "AMOXILINA",
-      "principleActives": [],
+      "active_principles": [],
       "documents": [
         {
           "expedient": "Amoxilina",
           "type": "PATIENT",
           "url": "https://google.com",
           "id": "0.5256553066739895"
+        }
+      ]
+    },
+    {
+      "id": "0.34136842560496383",
+      "published_at": "2024-04-23T20:33:53.001Z",
+      "company": "EMS",
+      "name": "AMOXILINA",
+      "principleActives": [
+        {
+          "id": "0.005966500742862424",
+          "name": "Dipirona"
+        }
+      ],
+      "documents": [
+        {
+          "expedient": "7531322313",
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.6915689445120874"
+        }
+      ],
+      "active_principles": [
+        {
+          "id": "0.005966500742862424",
+          "name": "Dipirona"
+        }
+      ]
+    },
+    {
+      "id": "0.18272805671146708",
+      "published_at": "2024-04-24T12:24:46.458Z",
+      "company": "",
+      "name": "",
+      "principleActives": [
+        {
+          "id": "d9ba4a5c-f812-4a32-ab89-688ceb09990e",
+          "name": "VALSARTANA"
+        },
+        {
+          "id": "6c79de3c-1c87-4ab5-9a88-32901790c16b",
+          "name": "CLAVULANATO DE POTÁSSIO"
+        },
+        {
+          "id": "0.33007628791597",
+          "name": "Dipirona"
+        }
+      ],
+      "documents": [
+        {
+          "id": "aeca6992-021e-4445-a5aa-3f915581182c",
+          "expedient": "0583187234",
+          "type": "PROFESSIONAL",
+          "url": "http://localhost:3000/pdf_sample.pdf"
+        },
+        {
+          "id": "ca5a33fb-fe42-4b8b-a967-c379368a2285",
+          "expedient": "0583187234",
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf"
+        }
+      ],
+      "active_principles": [
+        {
+          "id": "d9ba4a5c-f812-4a32-ab89-688ceb09990e",
+          "name": "VALSARTANA"
+        },
+        {
+          "id": "6c79de3c-1c87-4ab5-9a88-32901790c16b",
+          "name": "CLAVULANATO DE POTÁSSIO"
+        },
+        {
+          "id": "0.33007628791597",
+          "name": "Dipirona"
         }
       ]
     }
