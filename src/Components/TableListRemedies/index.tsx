@@ -5,7 +5,7 @@ import { Button } from '../Button'
 import { MagnifyingGlass, PencilLine } from 'phosphor-react'
 import { Remedy } from '../../context/RemediesProvider'
 import ModalDialog from '../ModalDialog'
-import { RemedyView } from '../Remedy'
+import { RemedyView } from '../RemedyView'
 import { Link } from 'react-router-dom'
 
 interface TableProps {
@@ -31,7 +31,7 @@ export function TableListRemedies({ remedies }: TableProps) {
               <td>
                 <ModalDialog
                   buttonOpenModal={
-                    <Button>
+                    <Button variant="icon">
                       <MagnifyingGlass />
                     </Button>
                   }
@@ -43,7 +43,7 @@ export function TableListRemedies({ remedies }: TableProps) {
               <td>{remedy.company}</td>
               <td>
                 <Link to={`/remedy/${remedy.id}/update`}>
-                  <Button>
+                  <Button variant="icon">
                     <PencilLine />
                   </Button>
                 </Link>
