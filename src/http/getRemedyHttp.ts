@@ -1,6 +1,6 @@
 import { api } from '../lib/axios'
 
-export async function getRemedy(remedyId: string) {
+export async function getRemedyHttp(remedyId: string) {
   const remedyResponse = await api.get(`/data/${remedyId}`)
 
   const remedyData = remedyResponse.data
