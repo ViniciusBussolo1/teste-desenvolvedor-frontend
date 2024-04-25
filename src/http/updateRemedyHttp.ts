@@ -19,12 +19,12 @@ export async function updateRemedyHttp(
   idRemedy: string,
   remedyRequest: RemedyRequestData,
 ) {
-  const dataRemedyRequest = {
-    ...remedyRequest,
-    active_principles: remedyRequest.principleActives,
-  }
-
   try {
+    const dataRemedyRequest = {
+      ...remedyRequest,
+      active_principles: remedyRequest.principleActives,
+    }
+
     await api.put(`/data/${idRemedy}`, dataRemedyRequest)
   } catch (error) {
     throw new Error('Erro atualizar remédio.')
