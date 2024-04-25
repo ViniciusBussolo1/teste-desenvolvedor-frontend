@@ -37,12 +37,16 @@ export function UpdateRemedy() {
   const { id } = useParams()
 
   const { getRemedyById, remedy, updateRemedyProvider } = useRemedies()
-  const isEmptyRemedy = Object.values(remedy).length === 0
+  const isEmptyRemedy = Object.values(remedy).length === 0 || remedy.name === ''
 
   const defaultValueRemedyName = remedy.name || ''
   const defaultValueRemedyCompany = remedy.company || ''
 
-  const { register: registerRemedy, getValues } = useForm<FormRemedySchema>({
+  const {
+    register: registerRemedy,
+    getValues,
+    setValue,
+  } = useForm<FormRemedySchema>({
     resolver: zodResolver(formRemedySchema),
     defaultValues: {
       name: defaultValueRemedyName,
@@ -84,6 +88,11 @@ export function UpdateRemedy() {
   useEffect(() => {
     getRemedy()
   }, [])
+
+  useEffect(() => {
+    setValue('name', remedy.name)
+    setValue('company', remedy.company)
+  }, [remedy])
 
   if (isEmptyRemedy) {
     return <p>loading...</p>
