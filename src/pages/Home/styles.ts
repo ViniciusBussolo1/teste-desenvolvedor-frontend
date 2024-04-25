@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { devices } from '../../styles/theme/devices'
 
 export const HomeContainer = styled.main`
   padding: 2rem 5rem;
@@ -9,6 +10,10 @@ export const HomeContainer = styled.main`
     flex-direction: column;
     gap: 1rem;
     justify-content: center;
+  }
+
+  @media ${devices.mobile} {
+    padding: 2rem 1rem;
   }
 `
 
@@ -25,5 +30,10 @@ export const ContainerInputs = styled.div`
   h1 {
     font-size: ${(props) => props.theme.md};
     color: ${(props) => props.theme['gray-100']};
+  }
+  @media ${devices.mobile} {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
   }
 `

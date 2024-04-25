@@ -16,6 +16,8 @@ import {
   InputRadioRoot,
 } from '../../components/InputRadio/styles'
 import { useCallback, useEffect } from 'react'
+import { CardRemedyResposive } from '../../components/CardRemedyResposive'
+import useScreenSize from '../../hooks/useScreenSize'
 
 const searchRemediesSchema = z.object({
   searchText: z.string().min(1, 'Necessário inserir um texto de busca.'),
@@ -25,6 +27,9 @@ const searchRemediesSchema = z.object({
 type SearchRemediesSchema = z.infer<typeof searchRemediesSchema>
 
 export function Home() {
+  const { width: windowWidth } = useScreenSize()
+
+  console.log('🚀 ~ Home ~ windowWidth:', windowWidth)
   const [searchParams, setSearchParams] = useSearchParams()
 
   const searchTextParams = searchParams.get('searchText') || ''
@@ -155,7 +160,8 @@ export function Home() {
           </Button>
         </ContainerButtons>
       </form>
-      <TableListRemedies remedies={remedies} />
+      {windowWidth > 480 && <TableListRemedies remedies={remedies} />}
+      {windowWidth < 480 && <CardRemedyResposive remedies={remedies} />}
       <Pagination
         totalItems={totalItems}
         nextPage={nextPage}
