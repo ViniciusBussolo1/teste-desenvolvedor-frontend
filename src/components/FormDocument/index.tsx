@@ -45,7 +45,7 @@ export function FormDocument({ document, closedModal }: FormDocumentProps) {
     formState: { errors },
   } = useForm<FormDocumentSchema>({
     resolver: zodResolver(formDocumentSchema),
-    defaultValues: {
+    values: {
       expedient: defaulfValueExpedient,
       url: defaulfValueUrl,
       type: defaulfValueType,
@@ -106,6 +106,7 @@ export function FormDocument({ document, closedModal }: FormDocumentProps) {
       <div>
         <label>Escolha o tipo de documento:</label>
         <Controller
+          defaultValue={defaulfValueType}
           control={control}
           name="type"
           render={({ field: { name, ref, onChange } }) => (
@@ -113,7 +114,7 @@ export function FormDocument({ document, closedModal }: FormDocumentProps) {
               name={name}
               ref={ref}
               onValueChange={onChange}
-              value={defaulfValueType}
+              defaultValue={defaulfValueType}
             >
               <ContainerRadio>
                 <div>
