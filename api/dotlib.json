@@ -900,7 +900,7 @@
     {
       "id": "0.34136842560496383",
       "published_at": "2024-04-23T20:33:53.001Z",
-      "company": "EMS",
+      "company": "CIMED",
       "name": "AMOXILINA",
       "principleActives": [
         {
@@ -970,8 +970,8 @@
       "name": "TESTE CREATE",
       "principleActives": [
         {
-          "id": "0.884693322453465",
-          "name": "ativo"
+          "id": "0.6176226382314556",
+          "name": "Dipirona"
         }
       ],
       "documents": [
@@ -984,10 +984,94 @@
       ],
       "active_principles": [
         {
-          "id": "0.884693322453465",
-          "name": "ativo"
+          "id": "0.6176226382314556",
+          "name": "Dipirona"
         }
       ]
+    },
+    {
+      "id": "0.6205326831420959",
+      "published_at": "2024-04-25T18:49:44.870Z",
+      "company": "EMS",
+      "name": "AMOXILINA",
+      "principleActives": [],
+      "documents": [
+        {
+          "expedient": "56465464",
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.22368077846104062"
+        }
+      ],
+      "active_principles": []
+    },
+    {
+      "id": "0.9110568767698053",
+      "published_at": "2024-04-25T19:14:33.990Z",
+      "company": "CIMED",
+      "name": "AMOXILINA",
+      "principleActives": [
+        {
+          "id": "0.6043720402133825",
+          "name": "Dipirona"
+        }
+      ],
+      "documents": [
+        {
+          "expedient": "45461321235",
+          "type": "PATIENT",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.44826541239857653"
+        }
+      ],
+      "active_principles": [
+        {
+          "id": "0.6043720402133825",
+          "name": "Dipirona"
+        }
+      ]
+    },
+    {
+      "id": "0.318646289171743",
+      "published_at": "2024-04-25T19:27:38.607Z",
+      "company": "EMS",
+      "name": "AMOXILINA",
+      "principleActives": [
+        {
+          "id": "0.2077251874393622",
+          "name": "Paracetamol"
+        }
+      ],
+      "documents": [
+        {
+          "expedient": "6666666",
+          "type": "PROFESSIONAL",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.6709284850801416"
+        }
+      ],
+      "active_principles": [
+        {
+          "id": "0.2077251874393622",
+          "name": "Paracetamol"
+        }
+      ]
+    },
+    {
+      "id": "0.16607007284002262",
+      "published_at": "2024-04-25T19:46:08.754Z",
+      "company": "EMS",
+      "name": "AMOXILINA",
+      "principleActives": [],
+      "documents": [
+        {
+          "expedient": "45645645",
+          "type": "PROFESSIONAL",
+          "url": "http://localhost:3000/pdf_sample.pdf",
+          "id": "0.4678133665514854"
+        }
+      ],
+      "active_principles": []
     }
   ]
 }
