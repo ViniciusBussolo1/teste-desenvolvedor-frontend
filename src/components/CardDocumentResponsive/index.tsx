@@ -41,7 +41,7 @@ export default function CardDocumentResponsive({
         openModal={isOpenModal}
         onOpenChangeModal={setIsOpenModal}
         buttonOpenModal={
-          <Button variant="icon" style={{ alignSelf: 'flex-end' }}>
+          <Button variant="icon">
             <NotePencil />
           </Button>
         }

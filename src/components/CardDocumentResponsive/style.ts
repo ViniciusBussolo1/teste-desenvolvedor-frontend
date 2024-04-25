@@ -14,5 +14,9 @@ export const CardContainer = styled.div`
   }
   strong {
     font-weight: bold;
+    color: ${(props) => props.theme['gray-200']};
+  }
+  & > button {
+    align-self: flex-end;
   }
 `
