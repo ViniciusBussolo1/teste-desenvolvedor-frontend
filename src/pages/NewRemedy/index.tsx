@@ -84,7 +84,7 @@ export function NewRemedy() {
       <h2>Adicionar Remedio:</h2>
       <FormRemedy registerRemedy={registerRemedy} />
       <HeaderDocuments>
-        <h2>Adicionar Documentos</h2>
+        <h2>Adicionar Documentos:</h2>
         <ModalDialog
           openModal={isOpenModal}
           onOpenChangeModal={setIsOpenModal}
