@@ -1,16 +1,22 @@
-import { HeaderContainer, NavContainer, LinkStyle } from './styles'
+import {
+  HeaderContainer,
+  NavContainer,
+  NavLinkStyle,
+  NavLinkButtonStyle,
+} from './styles'
 import { Button } from '../Button'
+import Logo from '../Logo'
 
 export function Header() {
   return (
     <HeaderContainer>
-      <div>Logo</div>
+      <Logo />
 
       <NavContainer>
-        <LinkStyle to="/">Home</LinkStyle>
-        <LinkStyle to="/remedy/new">
+        <NavLinkStyle to="/">Home</NavLinkStyle>
+        <NavLinkButtonStyle to="/remedy/new">
           <Button variant="success">Adicionar Remedio</Button>
-        </LinkStyle>
+        </NavLinkButtonStyle>
       </NavContainer>
     </HeaderContainer>
   )

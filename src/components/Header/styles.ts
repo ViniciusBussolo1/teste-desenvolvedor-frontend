@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import { devices } from '../../styles/theme/devices'
 
@@ -20,11 +20,22 @@ export const NavContainer = styled.nav`
   gap: 1rem;
 `
 
-export const LinkStyle = styled(Link)`
+export const NavLinkStyle = styled(NavLink)`
   color: ${(props) => props.theme['gray-200']};
   transition: 0.3s ease-out;
 
   &:hover {
     color: ${(props) => props.theme['gray-100']};
+  }
+
+  &.active {
+    border-bottom: 1px solid ${(props) => props.theme['gray-100']};
+    color: ${(props) => props.theme['gray-100']};
+  }
+`
+
+export const NavLinkButtonStyle = styled(NavLink)`
+  &.active {
+    display: none;
   }
 `
