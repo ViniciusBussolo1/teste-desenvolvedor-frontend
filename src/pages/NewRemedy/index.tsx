@@ -53,6 +53,18 @@ export function NewRemedy() {
       principleActives: remedy.principleActives,
       documents: remedy.documents,
     }
+
+    if (name.length === 0) {
+      toast.error('O nome do remédio não pode ser vazio.')
+      return
+    } else if (company.length === 0) {
+      toast.error('O laboratório do remédio não pode ser vazio.')
+      return
+    } else if (remedy.documents.length === 0) {
+      toast.error('O documento do remédio não pode ser vazio.')
+      return
+    }
+
     try {
       addRemedy(RemedyRequest)
       toast.success('Remédio adicionado com Sucesso.', {

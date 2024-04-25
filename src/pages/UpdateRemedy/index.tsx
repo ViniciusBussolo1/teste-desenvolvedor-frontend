@@ -63,16 +63,30 @@ export function UpdateRemedy() {
       principleActives: remedy.principleActives,
       documents: remedy.documents,
     }
+
+    if (name.length === 0) {
+      toast.error('O nome do remédio não pode ser vazio.')
+      return
+    } else if (company.length === 0) {
+      toast.error('O laboratório do remédio não pode ser vazio.')
+      return
+    } else if (remedy.documents.length === 0) {
+      toast.error('O documento do remédio não pode ser vazio.')
+      return
+    }
+
     try {
       updateRemedyProvider(remedy.id, remedyRequest)
-      toast.success('Remedio atualizado com sucesso', {
+      toast.success('Remédio atualizado com sucesso', {
         action: (
           <Link to="/">
             <Button variant="toast">Voltar a lista</Button>
           </Link>
         ),
       })
-    } catch (error) {}
+    } catch (error) {
+      toast.error('Erro ao adicionar o Remédio.')
+    }
   }
 
   function closedModal() {
