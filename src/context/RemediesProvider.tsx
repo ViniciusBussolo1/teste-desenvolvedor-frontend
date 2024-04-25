@@ -1,10 +1,10 @@
 import React, { createContext, useCallback, useEffect, useState } from 'react'
-import { getListOfRemedies } from '../http/getListOfRemedies'
-import { getListOfRemediesByName } from '../http/getListOfRemediesByName'
-import { getListOfRemediesByCompany } from '../http/getListOfRemediesByCompany'
-import { getRemedy } from '../http/getRemedy'
-import { createRemedy } from '../http/createRemedies'
-import { updateRemedy } from '../http/updateRemedy'
+import { getListOfRemediesHttp } from '../http/getListOfRemediesHttp'
+import { getListOfRemediesByNameHttp } from '../http/getListOfRemediesByNameHttp'
+import { getListOfRemediesByCompanyHttp } from '../http/getListOfRemediesByCompanyHttp'
+import { getRemedyHttp } from '../http/getRemedyHttp'
+import { createRemedyHttp } from '../http/createRemediesHttp'
+import { updateRemedyHttp } from '../http/updateRemedyHttp'
 
 export interface DocumentRemedy {
   id: string
@@ -24,8 +24,9 @@ export interface Remedy {
   published_at: string
   company: string
   documents: DocumentRemedy[] | []
-  principleActives: PrincipleActive[] | []
+  principleActives?: PrincipleActive[] | []
 }
+
 export interface RemedyRequest {
   id: string
   name: string
@@ -63,7 +64,7 @@ interface RemediesProviderProps {
 export const RemediesContext = createContext({} as RemediesContextProps)
 
 export function RemediesProvider({ children }: RemediesProviderProps) {
-  const [remedies, setRemedies] = useState<Remedy | never[]>([])
+  const [remedies, setRemedies] = useState<Remedy[]>([] as Remedy[])
   const [totalItems, setTotalItems] = useState<number>(1)
   const [remedy, setRemedy] = useState<Remedy>({} as Remedy)
 
@@ -72,15 +73,15 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
   )
 
   async function getRemedyById(remedyId: string): Promise<Remedy> {
-    const remedyData = await getRemedy(remedyId)
+    const remedyData = await getRemedyHttp(remedyId)
     setRemedy(remedyData)
     return remedy
   }
 
   async function getListAll(page: number) {
-    const { remediesData, totalItens } = await getListOfRemedies(page)
+    const { remediesData, totalItems } = await getListOfRemediesHttp(page)
 
-    setTotalItems(totalItens)
+    setTotalItems(totalItems)
     setRemedies(remediesData)
   }
 
@@ -96,11 +97,11 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
   }
 
   async function getListByName(name: string, page: number) {
-    const { remediesData, totalItens } = await getListOfRemediesByName(
+    const { remediesData, totalItems } = await getListOfRemediesByNameHttp(
       name,
       page,
     )
-    setTotalItems(totalItens)
+    setTotalItems(totalItems)
     setRemedies(remediesData)
   }
 
@@ -108,24 +109,35 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
     idRemedy: string,
     requestRamedy: RemedyRequest,
   ) {
-    await updateRemedy(idRemedy, requestRamedy)
+    console.log('🚀 ~ RemediesProvider ~ requestRamedy:', requestRamedy)
+    await updateRemedyHttp(idRemedy, requestRamedy)
   }
 
   async function getListByCompany(company: string, page: number) {
-    const { remediesData, totalItens } = await getListOfRemediesByCompany(
+    const { remediesData, totalItems } = await getListOfRemediesByCompanyHttp(
       company,
       page,
     )
-    setTotalItems(totalItens)
+    setTotalItems(totalItems)
     setRemedies(remediesData)
   }
 
   function addPrincipleActive(principleActive: PrincipleActive) {
-    setRemedy((prevRemedy) => ({
-      ...prevRemedy,
-      principleActives: [...prevRemedy.principleActives, principleActive],
-    }))
+    setRemedy((prevRemedy) => {
+      if (prevRemedy.principleActives) {
+        return {
+          ...prevRemedy,
+          principleActives: [...prevRemedy.principleActives, principleActive],
+        }
+      } else {
+        return {
+          ...prevRemedy,
+          principleActives: [principleActive],
+        }
+      }
+    })
   }
+
   function addDocument(documentRemedy: DocumentRemedy) {
     setRemedy((prevRemedy) => ({
       ...prevRemedy,
@@ -147,16 +159,25 @@ export function RemediesProvider({ children }: RemediesProviderProps) {
   }
 
   async function addRemedy(remedyRequestData: Remedy) {
-    createRemedy(remedyRequestData)
+    createRemedyHttp(remedyRequestData)
   }
 
   async function deletePrincipleActive(idPrincipleActive: string) {
-    setRemedy((prevRemedy) => ({
-      ...prevRemedy,
-      principleActives: prevRemedy.principleActives.filter(
-        (principleActive) => principleActive.id !== idPrincipleActive,
-      ),
-    }))
+    setRemedy((prevRemedy) => {
+      if (prevRemedy.principleActives) {
+        return {
+          ...prevRemedy,
+          principleActives: prevRemedy.principleActives.filter(
+            (principleActive) => principleActive.id !== idPrincipleActive,
+          ),
+        }
+      } else {
+        return {
+          ...prevRemedy,
+          principleActives: [],
+        }
+      }
+    })
   }
 
   function changeSearchParams({ page, searchText, typeSearch }: SearchParams) {
