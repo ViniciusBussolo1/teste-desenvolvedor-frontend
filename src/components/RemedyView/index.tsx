@@ -14,7 +14,8 @@ export function RemedyView({ remedyId }: RemedyViewProps) {
   const { getRemedyById, remedy } = useRemedies()
   const [urlDownloads, setUrlDownloads] = useState<string[]>([])
 
-  const isEmptyRemedy = Object.values(remedy).length === 0
+  const isEmptyRemedy =
+    Object.values(remedy).length === 0 || remedy?.published_at === ''
 
   function createListUrlDownload(url: string) {
     const blob = new Blob([url], { type: 'application/octet-stream' })
