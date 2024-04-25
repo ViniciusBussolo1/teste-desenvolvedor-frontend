@@ -17,10 +17,14 @@ interface RemedyRequestData {
   }[]
 }
 
-export async function createRemedy(remedyRequest: RemedyRequestData) {
+export async function createRemedyHttp(remedyRequest: RemedyRequestData) {
   const dataRemedyRequest = {
     ...remedyRequest,
     active_principles: remedyRequest.principleActives,
   }
-  await api.post('/data', dataRemedyRequest)
+  try {
+    await api.post('/data', dataRemedyRequest)
+  } catch (error) {
+    throw new Error('Erro registar remédio.')
+  }
 }
