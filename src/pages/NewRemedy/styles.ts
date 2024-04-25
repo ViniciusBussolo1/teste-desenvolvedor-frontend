@@ -30,8 +30,7 @@ export const HeaderDocuments = styled.div`
     h2 {
       font-size: ${(props) => props.theme.lg};
     }
-
-    button {
+    & > button {
       width: 60%;
     }
   }
