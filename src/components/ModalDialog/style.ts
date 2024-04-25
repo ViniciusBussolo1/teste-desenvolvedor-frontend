@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import * as Dialog from '@radix-ui/react-dialog'
+import { devices } from '../../styles/theme/devices'
 
 export const OverlayModal = styled(Dialog.Overlay)`
   background-color: rgba(0, 0, 0, 0.8);
@@ -24,4 +25,9 @@ export const ModalContent = styled(Dialog.Content)`
   flex-direction: column;
 
   overflow: auto;
+
+  @media ${devices.mobile} {
+    width: 90%;
+    height: 80vh;
+  }
 `
