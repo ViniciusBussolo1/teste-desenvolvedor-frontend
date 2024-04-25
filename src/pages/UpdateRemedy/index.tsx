@@ -1,0 +1,141 @@
+import { Button } from '../../components/Button'
+import { FormDocument } from '../../components/FormDocument'
+import ModalDialog from '../../components/ModalDialog'
+import { HeaderDocuments, UpdateFormContainer } from './styles'
+import { FormPrincipleAtive } from '../../components/FormPricipleActive'
+import ListDocuments from '../../components/ListDocuments'
+import ListPrincipleActives from '../../components/ListPrincipleActives'
+import { useCallback, useEffect, useState } from 'react'
+import { useRemedies } from '../../hooks/useRemedies'
+import { Link, useParams } from 'react-router-dom'
+import { FormRemedy } from '../../components/FormRemedy'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
+import { toast } from 'sonner'
+
+export interface PrincipleActive {
+  id: string
+  name: string
+}
+
+export interface DocumentRemedy {
+  id: string
+  expedient: string
+  type: 'PROFESSIONAL' | 'PATIENT'
+  url: string
+}
+
+const formRemedySchema = z.object({
+  name: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
+  company: z.string().min(1, { message: 'Esse campo não pode ser vazio.' }),
+})
+export type FormRemedySchema = z.infer<typeof formRemedySchema>
+
+export function UpdateRemedy() {
+  const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+  const { id } = useParams()
+
+  const { getRemedyById, remedy, updateRemedyProvider } = useRemedies()
+  const isEmptyRemedy = Object.values(remedy).length === 0 || remedy.name === ''
+
+  const defaultValueRemedyName = remedy.name || ''
+  const defaultValueRemedyCompany = remedy.company || ''
+
+  const {
+    register: registerRemedy,
+    getValues,
+    setValue,
+  } = useForm<FormRemedySchema>({
+    resolver: zodResolver(formRemedySchema),
+    defaultValues: {
+      name: defaultValueRemedyName,
+      company: defaultValueRemedyCompany,
+    },
+  })
+
+  function handleSubmitUpdateRemedy() {
+    const { name, company } = getValues()
+    const remedyRequest = {
+      ...remedy,
+      name: name.toUpperCase(),
+      company: company.toUpperCase(),
+      principleActives: remedy.principleActives,
+      documents: remedy.documents,
+    }
+
+    if (name.length === 0) {
+      toast.error('O nome do remédio não pode ser vazio.')
+      return
+    } else if (company.length === 0) {
+      toast.error('O laboratório do remédio não pode ser vazio.')
+      return
+    } else if (remedy.documents.length === 0) {
+      toast.error('O documento do remédio não pode ser vazio.')
+      return
+    }
+
+    try {
+      updateRemedyProvider(remedy.id, remedyRequest)
+      toast.success('Remédio atualizado com sucesso', {
+        action: (
+          <Link to="/">
+            <Button variant="toast">Voltar a lista</Button>
+          </Link>
+        ),
+      })
+    } catch (error) {
+      toast.error('Erro ao adicionar o Remédio.')
+    }
+  }
+
+  function closedModal() {
+    setIsOpenModal(false)
+  }
+
+  const getRemedy = useCallback(async () => {
+    if (id) {
+      getRemedyById(id)
+    }
+  }, [id])
+
+  useEffect(() => {
+    getRemedy()
+  }, [])
+
+  useEffect(() => {
+    setValue('name', remedy.name)
+    setValue('company', remedy.company)
+  }, [remedy])
+
+  if (isEmptyRemedy) {
+    return <p>loading...</p>
+  }
+  return (
+    <UpdateFormContainer>
+      <h2>Adicionar Remédio:</h2>
+      <FormRemedy registerRemedy={registerRemedy} />
+
+      <HeaderDocuments>
+        <h2>Documentos:</h2>
+        <ModalDialog
+          openModal={isOpenModal}
+          onOpenChangeModal={setIsOpenModal}
+          buttonOpenModal={
+            <Button variant="success">Adicionar documento </Button>
+          }
+          ContentModal={<FormDocument closedModal={closedModal} />}
+        />
+      </HeaderDocuments>
+      <ListDocuments />
+
+      <h2>Principio Ativos:</h2>
+      <FormPrincipleAtive />
+      <ListPrincipleActives />
+
+      <Button variant="success" onClick={handleSubmitUpdateRemedy}>
+        Salvar
+      </Button>
+    </UpdateFormContainer>
+  )
+}
