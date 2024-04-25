@@ -18,6 +18,7 @@ import {
 import { useCallback, useEffect } from 'react'
 import { CardRemedyResposive } from '../../components/CardRemedyResposive'
 import useScreenSize from '../../hooks/useScreenSize'
+import { toast } from 'sonner'
 
 const searchRemediesSchema = z.object({
   searchText: z.string().min(1, 'Necessário inserir um texto de busca.'),
@@ -50,7 +51,6 @@ export function Home() {
     handleSubmit,
     control,
     reset,
-    clearErrors,
     formState: { isSubmitting, errors },
   } = useForm<SearchRemediesSchema>({
     resolver: zodResolver(searchRemediesSchema),
@@ -86,9 +86,10 @@ export function Home() {
   }
 
   function handleClearForm() {
-    reset()
-    clearErrors('searchText')
-
+    reset({
+      searchText: '',
+      typeSearch: 'name',
+    })
     setSearchParams({ page: '1' })
   }
 
@@ -104,6 +105,12 @@ export function Home() {
     setSearchParamsProvider()
   }, [setSearchParamsProvider])
 
+  useEffect(() => {
+    if (errors.searchText) {
+      toast.warning(errors.searchText?.message)
+    }
+  }, [errors])
+
   if (!remedies) {
     return <p>Loading...</p>
   }
@@ -116,7 +123,6 @@ export function Home() {
           <h1>Filtros:</h1>
           <Input
             type="text"
-            error={errors.searchText?.message}
             placeholder="Nome do laboratório ou remédio de acordo com a seleção..."
             {...register('searchText')}
           />

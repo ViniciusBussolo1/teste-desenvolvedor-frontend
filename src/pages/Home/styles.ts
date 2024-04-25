@@ -25,7 +25,7 @@ export const ContainerInputs = styled.div`
   width: 100%;
   display: flex;
   gap: 0.9rem;
-  align-items: baseline;
+  align-items: center;
   justify-content: start;
   h1 {
     font-size: ${(props) => props.theme.md};
