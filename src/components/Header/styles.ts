@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { devices } from '../../styles/theme/devices'
 
 export const HeaderContainer = styled.header`
   left: 0;
@@ -9,6 +10,9 @@ export const HeaderContainer = styled.header`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  @media ${devices.mobile} {
+    padding: 1rem;
+  }
 `
 export const NavContainer = styled.nav`
   display: flex;
