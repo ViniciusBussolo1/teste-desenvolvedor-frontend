@@ -15,7 +15,7 @@ interface RemedyRequestData {
   }[]
 }
 
-export async function updateRemedy(
+export async function updateRemedyHttp(
   idRemedy: string,
   remedyRequest: RemedyRequestData,
 ) {
@@ -23,5 +23,10 @@ export async function updateRemedy(
     ...remedyRequest,
     active_principles: remedyRequest.principleActives,
   }
-  await api.put(`/data/${idRemedy}`, dataRemedyRequest)
+
+  try {
+    await api.put(`/data/${idRemedy}`, dataRemedyRequest)
+  } catch (error) {
+    throw new Error('Erro atualizar remédio.')
+  }
 }
