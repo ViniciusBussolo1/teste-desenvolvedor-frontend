@@ -33,7 +33,7 @@ export interface RemedyRequest {
   published_at: string
   company: string
   documents: DocumentRemedy[]
-  principleActives: PrincipleActive[]
+  principleActives?: PrincipleActive[] | []
 }
 
 interface SearchParams {
