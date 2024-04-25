@@ -7,8 +7,11 @@ import { NotePencil } from 'phosphor-react'
 import ModalDialog from '../ModalDialog'
 import { FormDocument } from '../FormDocument'
 import { useRemedies } from '../../hooks/useRemedies'
+import useScreenSize from '../../hooks/useScreenSize'
+import CardDocumentResponsive from '../CardDocumentResponsive'
 
 export default function ListDocuments() {
+  const { width: widthScreen } = useScreenSize()
   const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
 
   const { remedy } = useRemedies()
@@ -22,6 +25,15 @@ export default function ListDocuments() {
     setIsOpenModal(false)
   }
 
+  if (widthScreen < 480) {
+    return (
+      <>
+        {documents.map((document) => (
+          <CardDocumentResponsive document={document} key={document.id} />
+        ))}
+      </>
+    )
+  }
   return (
     <ListContainer>
       <Table>
